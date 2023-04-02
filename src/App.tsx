@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
-import Galaxy from "./components/3D/galaxy";
+import Galaxy from "./components/3D/Galaxy";
 import "./customCss/cursor.css";
 import "./App.css";
 
