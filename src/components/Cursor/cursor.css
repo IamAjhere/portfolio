@@ -1,3 +1,4 @@
+/* cursor.css */
 .cursor {
   position: fixed;
   top: 0;
@@ -8,11 +9,14 @@
   border-radius: 50%;
   pointer-events: none;
   mix-blend-mode: difference;
-  background-color: transparent;
   z-index: 9999;
-  transition: all 150ms ease;
+  transition: all 50ms ease;
 }
-
+@media screen and (max-width: 768px) {
+  .cursor {
+    display: none;
+  }
+}
 .cursor::before {
   content: "";
   position: absolute;
@@ -23,4 +27,12 @@
   background-color: white;
   border-radius: 50%;
   transform: translate(-50%, -50%);
+}
+.cursor-hover {
+  width: 40px;
+  height: 40px;
+  border: 1px solid white;
+  cursor: none;
+  background-color: rgba(255, 255, 255);
+  background-blend-mode: difference;
 }

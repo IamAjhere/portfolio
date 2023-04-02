@@ -16,10 +16,11 @@ const Galaxy: React.FC = () => {
 
   return (
     <>
-      <PerspectiveCamera makeDefault position={[0, 0, 8]} />
-      <OrbitControls />
+      <PerspectiveCamera makeDefault position={[0, 0, 8]} near={1} far={1000} />
+      <OrbitControls maxDistance={50} />
       <ambientLight intensity={0.1} />
-      <pointLight position={[10, 10, 10]} />
+      <pointLight color="teal" position={[-10, -10, -10]} intensity={0.3} />
+      <pointLight color="purple" position={[10, 10, 10]} intensity={0.3} />
       <Stars
         radius={100}
         depth={50}
