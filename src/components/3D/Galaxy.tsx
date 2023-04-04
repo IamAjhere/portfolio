@@ -3,32 +3,18 @@ import { useThree } from "@react-three/fiber";
 import { OrbitControls, Stars, PerspectiveCamera } from "@react-three/drei";
 import * as THREE from "three";
 
-interface GalaxyProps {
-  activeSection: number;
-}
-
-const Galaxy: React.FC<GalaxyProps> = ({ activeSection }) => {
+const Galaxy = () => {
   const { scene } = useThree();
 
   useEffect(() => {
     scene.fog = new THREE.Fog("black", 10, 50);
   }, [scene]);
 
-  useEffect(() => {
-    // Update the galaxy based on the active section
-    // You can customize this effect as per your needs
-    if (activeSection === 1) {
-      scene.background = new THREE.Color("black");
-    } else if (activeSection === 2) {
-      scene.background = new THREE.Color("darkblue");
-    } else if (activeSection === 3) {
-      scene.background = new THREE.Color("darkred");
-    } else if (activeSection === 4) {
-      scene.background = new THREE.Color("darkgreen");
-    } else {
-      scene.background = new THREE.Color("black");
-    }
-  }, [activeSection, scene]);
+  const blackStarMaterial = new THREE.PointsMaterial({
+    color: "black",
+    size: 0.05,
+    sizeAttenuation: true,
+  });
 
   return (
     <>
@@ -44,7 +30,7 @@ const Galaxy: React.FC<GalaxyProps> = ({ activeSection }) => {
         depth={50}
         count={10000}
         factor={4}
-        saturation={0}
+        saturation={1}
         fade
       />
     </>

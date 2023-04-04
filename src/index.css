@@ -4,4 +4,8 @@
 :root {
   font-family: "Roboto Mono", monospace;
   cursor: none;
+  background-color: black;
+}
+body {
+  background-color: black;
 }

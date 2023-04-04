@@ -18,50 +18,25 @@ const navLinks = [
 ];
 
 function App() {
-  const [activeSection, setActiveSection] = useState(1);
-  const aboutRef = useRef<HTMLDivElement>(null);
-  const skillsRef = useRef<HTMLDivElement>(null);
-  const projectsRef = useRef<HTMLDivElement>(null);
-  const contactRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(parseInt(entry.target.id.replace("section-", "")));
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-
-    observer.observe(aboutRef.current!);
-    observer.observe(skillsRef.current!);
-    observer.observe(projectsRef.current!);
-    observer.observe(contactRef.current!);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
   return (
-    <div className="relative w-full h-full">
+    <div
+      className={`relative w-full h-full`}
+      style={{ backgroundColor: "black" }}
+    >
       <CustomCursor />
       <Header name="Mohamed Ajmal" navLinks={navLinks} />
-      <GalaxyBackground activeSection={activeSection} />
+      <GalaxyBackground />
       <div className="absolute top-0 left-0 w-full h-full">
-        <div id="about" ref={aboutRef} className="h-screen">
+        <div id="about" className="h-screen">
           <About />
         </div>
-        <div id="skills" ref={skillsRef} className="h-screen">
+        <div id="skills" className="h-screen">
           <Skills />
         </div>
-        <div id="projects" ref={projectsRef} className="h-screen">
+        <div id="projects" className="h-screen">
           <Projects />
         </div>
-        <div id="contact" ref={contactRef} className="h-screen">
+        <div id="contact" className="h-screen">
           <Contact />
         </div>
       </div>
