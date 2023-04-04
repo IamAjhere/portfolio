@@ -19,10 +19,7 @@ const navLinks = [
 
 function App() {
   return (
-    <div
-      className={`relative w-full h-full`}
-      style={{ backgroundColor: "black" }}
-    >
+    <div className={`relative w-full h-full`}>
       <CustomCursor />
       <Header name="Mohamed Ajmal" navLinks={navLinks} />
       <GalaxyBackground />
