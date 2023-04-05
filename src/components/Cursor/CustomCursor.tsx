@@ -43,7 +43,7 @@ function CustomCursor() {
     };
   }, []);
 
-  return <div className="cursor" ref={cursorRef} />;
+  return <div className="cursor hidden sm:flex" ref={cursorRef} />;
 }
 
 export default CustomCursor;

@@ -12,11 +12,6 @@
   z-index: 9999;
   transition: all 70ms ease;
 }
-@media screen and (max-width: 768px) {
-  .cursor {
-    display: none;
-  }
-}
 .cursor::before {
   content: "";
   position: absolute;
