@@ -1,4 +1,4 @@
-interface IProfile {
+export interface IProfile {
   login: string;
   id: number;
   avatar_url: string;

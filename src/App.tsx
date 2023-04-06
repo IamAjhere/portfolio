@@ -8,6 +8,7 @@ import Contact from "./components/Sections/Contact";
 import Projects from "./components/Sections/Projects";
 import Skills from "./components/Sections/Skills";
 import axios from "axios";
+import { IProfile } from "./Types/ProfileTypes";
 
 const navLinks = [
   { label: "About", href: "about" },
