@@ -1,6 +1,6 @@
 import React, { useMemo, useEffect } from "react";
 import { useThree, useFrame } from "@react-three/fiber";
-import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
+import { OrbitControls, PerspectiveCamera, Stars } from "@react-three/drei";
 import * as THREE from "three";
 
 const Galaxy = () => {
@@ -14,13 +14,13 @@ const Galaxy = () => {
     const scrollY = window.scrollY;
     const scrollPercent =
       scrollY / (document.body.scrollHeight - window.innerHeight);
-    camera.position.z = 8 + scrollPercent * 10;
+    camera.position.z = 8 + scrollPercent * 60;
     camera.updateProjectionMatrix();
   });
   const starGeometry = useMemo(() => {
     const geometry = new THREE.BufferGeometry();
     const count = 10000;
-    const positions = new Float32Array(count * 2);
+    const positions = new Float32Array(count * 4);
     for (let i = 0; i < count * 4; i++) {
       positions[i] = (Math.random() - 0.5) * 100;
     }
@@ -44,15 +44,8 @@ const Galaxy = () => {
         far={1000}
         fov={fov}
       />
-      <OrbitControls
-        maxDistance={50}
-        minPolarAngle={Math.PI / 6}
-        maxPolarAngle={Math.PI / 2 - 0.1}
-        enableRotate={true}
-        enablePan={true}
-        enableZoom={true}
-      />
-      <points geometry={starGeometry} material={starMaterial} />{" "}
+      <points geometry={starGeometry} material={starMaterial} />
+      <Stars fade />
     </>
   );
 };

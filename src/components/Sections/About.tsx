@@ -1,5 +1,5 @@
 import React from "react";
-import { IProfile } from "../../Types/ProfileTypes";
+import { IProfile } from "../../Types/GitTypes";
 
 interface AboutProps {
   profile: IProfile | null;

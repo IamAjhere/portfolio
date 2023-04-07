@@ -8,23 +8,28 @@ import Contact from "./components/Sections/Contact";
 import Projects from "./components/Sections/Projects";
 import Skills from "./components/Sections/Skills";
 import axios from "axios";
-import { IProfile } from "./Types/ProfileTypes";
+import { IProfile, IRepository } from "./Types/GitTypes";
 
 const navLinks = [
   { label: "About", href: "about" },
-  { label: "Skills", href: "skills" },
   { label: "Projects", href: "projects" },
+  { label: "Skills", href: "skills" },
   { label: "Contact", href: "contact" },
 ];
 function App() {
   const [profile, setProfile] = useState<IProfile | null>(null);
+  const [repos, setRepos] = useState<IRepository[] | null>(null);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "https://api.github.com/users/IamAjHere"
-        );
-        setProfile(response.data);
+        const [profileResponse, reposResponse] = await Promise.all([
+          axios.get("https://api.github.com/users/IamAjHere"),
+          axios.get("https://api.github.com/users/IamAjHere/repos"),
+        ]);
+
+        setProfile(profileResponse.data);
+        setRepos(reposResponse.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -32,6 +37,7 @@ function App() {
 
     fetchData();
   }, []);
+
   console.log(profile);
   return (
     <div className={`relative w-full h-full`}>
@@ -47,16 +53,16 @@ function App() {
             <About profile={profile} />
           </div>
           <div
+            id="projects"
+            className="h-screen border-l-2 border-r-2 border-white"
+          >
+            <Projects repos={repos} />
+          </div>
+          <div
             id="skills"
             className="h-screen border-l-2 border-r-2 border-white"
           >
             <Skills />
-          </div>
-          <div
-            id="projects"
-            className="h-screen border-l-2 border-r-2 border-white"
-          >
-            <Projects />
           </div>
           <div
             id="contact"
