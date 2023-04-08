@@ -11,7 +11,7 @@ const About: React.FC<AboutProps> = ({ profile }) => {
   }
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center bg-transparent">
+    <div className="w-full h-full flex flex-col items-center justify-center p-4 mt-[-32]">
       <div className="rounded-full overflow-hidden w-48 h-48 mb-8">
         <img
           src={profile.avatar_url}
@@ -19,13 +19,13 @@ const About: React.FC<AboutProps> = ({ profile }) => {
           className="w-full h-full object-cover"
         />
       </div>
-      <h1 className="text-6xl font-bold text-center text-white mb-4">
+      <h1 className="text-4xl sm:text-6xl font-bold text-center text-white mb-4">
         Hello! I'm {profile.name}
       </h1>
-      <p className="text-xl text-center text-white mx-8 mb-4">
+      <p className="text-lg sm:text-xl text-center text-white mx-4 sm:mx-8 mb-4">
         Full Stack Engineer & Cloud Computing Enthusiast
       </p>
-      <div className=" bg-white rounded-lg p-10 mx-32 backdrop-blur-md shadow-lg text-lg text-center text-black">
+      <div className="bg-white rounded-lg p-4 sm:p-10 mx-4 sm:mx-32  shadow-lg text-sm sm:text-lg text-center text-black">
         A full stack software engineer from Anuradhapura, Sri Lanka, proficient
         in MERN stack and AWS. Committed to staying up-to-date and ensuring
         secure, efficient solutions. Discover my work, skills, and achievements

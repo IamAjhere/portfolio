@@ -27,7 +27,7 @@ function App() {
           axios.get("https://api.github.com/users/IamAjHere"),
           axios.get("https://api.github.com/users/IamAjHere/repos"),
         ]);
-
+        console.log(profileResponse);
         setProfile(profileResponse.data);
         setRepos(reposResponse.data);
       } catch (error) {
@@ -44,7 +44,7 @@ function App() {
       <CustomCursor />
       <Header name={`${profile?.name}`} navLinks={navLinks} />
       <GalaxyBackground />
-      <div className="absolute top-0 left-0 w-full h-full">
+      <div className="absolute top-0 left-0 w-full h-full pt-12">
         <div className="container mx-auto px-4">
           <div
             id="about"
@@ -56,7 +56,7 @@ function App() {
             id="projects"
             className="h-screen border-l-2 border-r-2 border-white"
           >
-            <Projects repos={repos} />
+            <Projects repos={repos} login={profile?.login} />
           </div>
           <div
             id="skills"
