@@ -16,7 +16,7 @@ interface RepoCardProps {
 }
 
 const RepoCard: React.FC<RepoCardProps> = ({ repo, formatRepoName }) => (
-  <div className="m-4 w-80 h-72 bg-white p-4 rounded shadow flex flex-col">
+  <div className="m-4 w-80 h-80 md:h-72 bg-white p-4 rounded shadow flex flex-col">
     <div className="flex-grow">
       <h2 className="font-bold text-lg mb-2">
         <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
@@ -31,7 +31,7 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, formatRepoName }) => (
       <div>
         <span className="text-gray-600">{repo.language}</span>
       </div>
-      <div>
+      <div className="p-2 md:p-0">
         <span className="text-gray-600 mr-2">⭐ {repo.stargazers_count}</span>
         <span className="text-gray-600">🍴 {repo.forks_count}</span>
       </div>
@@ -58,14 +58,16 @@ const Projects: React.FC<ProjectsProps> = ({ repos, login }) => {
     : [];
 
   return (
-    <div className="w-full h-full flex flex-wrap items-start justify-center text-black">
+    <div className="w-full h-full flex flex-wrap items-center justify-center text-black">
       {isMobile ? (
         <Carousel
-          showArrows
+          showArrows={false}
           infiniteLoop
           showStatus={false}
           showThumbs={false}
           className="w-full"
+          autoPlay
+          interval={3000}
         >
           {repoCards}
         </Carousel>
