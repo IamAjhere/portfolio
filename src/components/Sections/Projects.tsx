@@ -4,6 +4,10 @@ import { IProfile, IRepository } from "../../Types/GitTypes";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useMediaQuery } from "react-responsive";
+import githubIcon from "../../assets/github icon.png";
+import linkIcon from "../../assets/link-icon.png";
+import starIcon from "../../assets/star-icon.png";
+import forkIcon from "../../assets/fork-icon.png";
 
 interface ProjectsProps {
   repos: IRepository[] | null;
@@ -52,7 +56,7 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, formatRepoName }) => (
           }}
         >
           <img
-            src="src/assets/github icon.png"
+            src={githubIcon}
             alt="GitHub Icon"
             style={{
               width: "1em",
@@ -73,7 +77,7 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, formatRepoName }) => (
           }}
         >
           <img
-            src="src/assets/link-icon.png"
+            src={linkIcon}
             alt="Link Icon"
             style={{
               width: "1em",
@@ -89,7 +93,7 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, formatRepoName }) => (
       <span className="text-gray-300 mr-2">{repo.language}</span>
       <div className="flex items-center">
         <img
-          src="src/assets/star-icon.png"
+          src={starIcon}
           alt="Star Icon"
           style={{
             width: "1em",
@@ -100,7 +104,7 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, formatRepoName }) => (
         />
         <span className="text-gray-300 mr-2">{repo.stargazers_count}</span>
         <img
-          src="src/assets/fork-icon.png"
+          src={forkIcon}
           alt="Fork Icon"
           style={{
             width: "1em",
