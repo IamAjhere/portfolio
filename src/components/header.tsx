@@ -31,7 +31,7 @@ const Header: React.FC<HeaderProps> = ({ name, logo, navLinks }) => {
                     to={navLink.href}
                     smooth={true}
                     duration={1000}
-                    offset={-42}
+                    offset={-40}
                     className="nav-link cursor-none"
                   >
                     {navLink.label}

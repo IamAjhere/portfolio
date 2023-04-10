@@ -40,12 +40,12 @@ function App() {
 
   console.log(profile);
   return (
-    <div className={`relative w-full h-full`}>
+    <div className="relative w-full h-full">
       <CustomCursor />
       <Header name={`${profile?.name}`} navLinks={navLinks} />
       <GalaxyBackground />
-      <div className="absolute top-0 left-0 w-full h-full pt-12">
-        <div className="container mx-auto px-4">
+      <div className="flex flex-col items-stretch h-full pt-12 z-20">
+        <div className="container mx-auto px-4 flex-grow">
           <div
             id="about"
             className="h-screen border-l-2 border-r-2 border-white"

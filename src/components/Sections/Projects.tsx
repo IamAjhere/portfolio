@@ -16,24 +16,34 @@ interface RepoCardProps {
 }
 
 const RepoCard: React.FC<RepoCardProps> = ({ repo, formatRepoName }) => (
-  <div className="m-4 w-80 h-80 md:h-72 bg-white p-4 rounded shadow flex flex-col">
+  <div
+    className="m-4 w-80 h-96 sm:w-80 sm:h-72 p-4 rounded shadow flex flex-col"
+    style={{
+      background: "rgba(0, 0, 0, 0.6)",
+      border: "2px solid white",
+      color: "white",
+      backdropFilter: "blur(10px)",
+    }}
+  >
     <div className="flex-grow">
-      <h2 className="font-bold text-lg mb-2">
-        <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
-          {formatRepoName(repo.name)}
-        </a>
-      </h2>
-      <div className="text-gray-700 h-12">
+      <h2 className="font-bold text-lg mb-2">{formatRepoName(repo.name)}</h2>
+      <div className="text-gray-100 h-12 mb-4">
         <p className="">{repo.description}</p>
       </div>
     </div>
-    <div className="mt-4 flex justify-between items-center">
-      <div>
-        <span className="text-gray-600">{repo.language}</span>
-      </div>
-      <div className="p-2 md:p-0">
-        <span className="text-gray-600 mr-2">⭐ {repo.stargazers_count}</span>
-        <span className="text-gray-600">🍴 {repo.forks_count}</span>
+    <div className="mt-4 mb-2 flex items-center">
+      <button
+        onClick={() => window.open(repo.html_url, "_blank")}
+        className="text-xs sm:text-sm text-white bg-transparent border border-white rounded px-2 py-1 mr-2 transition duration-300 ease-in-out transform hover:scale-105"
+      >
+        Source
+      </button>
+    </div>
+    <div className="flex justify-between items-center">
+      <span className="text-gray-300 mr-2">{repo.language}</span>
+      <div className="flex items-center">
+        <span className="text-gray-300 mr-2">⭐ {repo.stargazers_count}</span>
+        <span className="text-gray-300">🍴 {repo.forks_count}</span>
       </div>
     </div>
   </div>
@@ -45,6 +55,15 @@ function formatRepoName(name: string) {
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 }
+const chunk = (array: any[], size: number) => {
+  const chunkedArr = [];
+  let index = 0;
+  while (index < array.length) {
+    chunkedArr.push(array.slice(index, size + index));
+    index += size;
+  }
+  return chunkedArr;
+};
 
 const Projects: React.FC<ProjectsProps> = ({ repos, login }) => {
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
@@ -57,9 +76,14 @@ const Projects: React.FC<ProjectsProps> = ({ repos, login }) => {
         ))
     : [];
 
+  const repoCardsChunks = chunk(repoCards, isMobile ? 1 : 6);
+
   return (
-    <div className="w-full h-full flex flex-wrap items-center justify-center text-black">
-      {isMobile ? (
+    <div className="w-full h-full flex flex-col items-center justify-center text-black px-2 py-2 ">
+      <h1 className="text-4xl mt-2 sm:mt-1 sm:text-6xl font-bold text-center text-white mb-4">
+        Projects
+      </h1>
+      <div className="w-full flex flex-wrap items-center justify-center">
         <Carousel
           showArrows={false}
           infiniteLoop
@@ -67,13 +91,15 @@ const Projects: React.FC<ProjectsProps> = ({ repos, login }) => {
           showThumbs={false}
           className="w-full"
           autoPlay
-          interval={3000}
+          interval={isMobile ? 4000 : 8000}
         >
-          {repoCards}
+          {repoCardsChunks.map((chunk, index) => (
+            <div key={index} className="flex flex-wrap justify-center">
+              {chunk}
+            </div>
+          ))}
         </Carousel>
-      ) : (
-        <>{repoCards}</>
-      )}
+      </div>
     </div>
   );
 };

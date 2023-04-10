@@ -25,7 +25,15 @@ const About: React.FC<AboutProps> = ({ profile }) => {
       <p className="text-lg sm:text-xl text-center text-white mx-4 sm:mx-8 mb-4">
         Full Stack Engineer & Cloud Computing Enthusiast
       </p>
-      <div className="bg-white rounded-lg p-4 sm:p-10 mx-4 sm:mx-32  shadow-lg text-sm sm:text-lg text-center text-black">
+      <div
+        className="bg-black rounded-lg p-4 sm:p-10 mx-4 sm:mx-32  shadow-lg text-sm sm:text-lg text-center text-white"
+        style={{
+          background: "rgba(0, 0, 0, 0.6)",
+          border: "1px solid white",
+          color: "white",
+          backdropFilter: "blur(10px)",
+        }}
+      >
         A full stack software engineer from Anuradhapura, Sri Lanka, proficient
         in MERN stack and AWS. Committed to staying up-to-date and ensuring
         secure, efficient solutions. Discover my work, skills, and achievements

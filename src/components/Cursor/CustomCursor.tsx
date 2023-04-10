@@ -25,19 +25,19 @@ function CustomCursor() {
       }
     };
 
-    const navLinks = document.querySelectorAll(".nav-link");
+    const buttons = document.querySelectorAll("button, .nav-link");
 
-    navLinks.forEach((navLink) => {
-      navLink.addEventListener("mouseenter", onMouseEnter);
-      navLink.addEventListener("mouseleave", onMouseLeave);
+    buttons.forEach((button) => {
+      button.addEventListener("mouseenter", onMouseEnter);
+      button.addEventListener("mouseleave", onMouseLeave);
     });
 
     document.addEventListener("mousemove", onMouseMove);
 
     return () => {
-      navLinks.forEach((navLink) => {
-        navLink.removeEventListener("mouseenter", onMouseEnter);
-        navLink.removeEventListener("mouseleave", onMouseLeave);
+      buttons.forEach((button) => {
+        button.removeEventListener("mouseenter", onMouseEnter);
+        button.removeEventListener("mouseleave", onMouseLeave);
       });
       document.removeEventListener("mousemove", onMouseMove);
     };
