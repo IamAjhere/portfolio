@@ -25,7 +25,7 @@ function CustomCursor() {
       }
     };
 
-    const buttons = document.querySelectorAll("button, .nav-link");
+    const buttons = document.querySelectorAll(".nav-link, button");
 
     buttons.forEach((button) => {
       button.addEventListener("mouseenter", onMouseEnter);
