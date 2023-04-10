@@ -22,5 +22,5 @@ export interface IRepository {
   language: string;
   stargazers_count: number;
   forks_count: number;
-  homepage: number;
+  homepage: string;
 }

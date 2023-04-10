@@ -17,16 +17,16 @@ interface RepoCardProps {
 
 const RepoCard: React.FC<RepoCardProps> = ({ repo, formatRepoName }) => (
   <div
-    className="m-4 w-80 h-96 sm:w-80 sm:h-72 p-4 rounded shadow flex flex-col"
+    className="m-2 w-80 h-96 sm:w-80 sm:h-72 p-4 rounded-lg shadow flex flex-col"
     style={{
-      background: "rgba(0, 0, 0, 0.6)",
+      background: "rgba(0, 0, 0, 0.7)",
       border: "2px solid white",
       color: "white",
       backdropFilter: "blur(10px)",
     }}
   >
     <div className="flex-grow">
-      <h2 className="font-bold text-lg mb-2">{formatRepoName(repo.name)}</h2>
+      <h2 className="font-bold text-l mb-2">{formatRepoName(repo.name)}</h2>
       <div className="text-gray-100 h-12 mb-4">
         <p className="">{repo.description}</p>
       </div>
@@ -35,15 +35,81 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, formatRepoName }) => (
       <button
         onClick={() => window.open(repo.html_url, "_blank")}
         className="text-xs sm:text-sm text-white bg-transparent border border-white rounded px-2 py-1 mr-2 transition duration-300 ease-in-out transform hover:scale-105"
+        style={{
+          display: "flex",
+          alignItems: "center",
+        }}
       >
-        Source
+        <div
+          style={{
+            width: "1em",
+            height: "1em",
+            background: "white",
+            borderRadius: "50%",
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <img
+            src="src/assets/github icon.png"
+            alt="GitHub Icon"
+            style={{
+              width: "1em",
+              height: "1em",
+            }}
+          />
+        </div>
+        <span style={{ marginLeft: "0.5em" }}>Source</span>
       </button>
+
+      {repo.homepage && (
+        <button
+          onClick={() => window.open(repo.homepage, "_blank")}
+          className="text-xs sm:text-sm text-black bg-white border border-white rounded px-2 py-1 mr-2 transition duration-300 ease-in-out transform hover:scale-105"
+          style={{
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <img
+            src="src/assets/link-icon.png"
+            alt="Link Icon"
+            style={{
+              width: "1em",
+              height: "1em",
+              marginRight: "0.5em",
+            }}
+          />
+          Website
+        </button>
+      )}
     </div>
     <div className="flex justify-between items-center">
       <span className="text-gray-300 mr-2">{repo.language}</span>
       <div className="flex items-center">
-        <span className="text-gray-300 mr-2">⭐ {repo.stargazers_count}</span>
-        <span className="text-gray-300">🍴 {repo.forks_count}</span>
+        <img
+          src="src/assets/star-icon.png"
+          alt="Star Icon"
+          style={{
+            width: "1em",
+            height: "1em",
+            marginRight: "0.5em",
+            filter: "invert(1)",
+          }}
+        />
+        <span className="text-gray-300 mr-2">{repo.stargazers_count}</span>
+        <img
+          src="src/assets/fork-icon.png"
+          alt="Fork Icon"
+          style={{
+            width: "1em",
+            height: "1em",
+            marginRight: "0.5em",
+            filter: "invert(1)",
+          }}
+        />
+        <span className="text-gray-300">{repo.forks_count}</span>
       </div>
     </div>
   </div>
@@ -80,7 +146,7 @@ const Projects: React.FC<ProjectsProps> = ({ repos, login }) => {
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center text-black px-2 py-2 ">
-      <h1 className="text-4xl mt-2 sm:mt-1 sm:text-6xl font-bold text-center text-white mb-4">
+      <h1 className="text-4xl mt-1 sm:mt-1 sm:text-6xl font-bold text-center text-white mb-4">
         Projects
       </h1>
       <div className="w-full flex flex-wrap items-center justify-center">
