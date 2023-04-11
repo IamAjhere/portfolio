@@ -11,10 +11,26 @@ import axios from "axios";
 import { IProfile, IRepository } from "./Types/GitTypes";
 
 const navLinks = [
-  { label: "About", href: "about" },
-  { label: "Projects", href: "projects" },
-  { label: "Skills", href: "skills" },
-  { label: "Contact", href: "contact" },
+  {
+    label: "About",
+    href: "about",
+    icon: "https://img.icons8.com/ios-filled/50/000000/user-male-circle.png",
+  },
+  {
+    label: "Projects",
+    href: "projects",
+    icon: "https://img.icons8.com/ios-filled/50/null/git.png",
+  },
+  {
+    label: "Skills",
+    href: "skills",
+    icon: "https://img.icons8.com/ios-filled/50/null/gear.png",
+  },
+  {
+    label: "Contact",
+    href: "contact",
+    icon: "https://img.icons8.com/android/24/null/filled-message.png",
+  },
 ];
 function App() {
   const [profile, setProfile] = useState<IProfile | null>(null);
@@ -38,13 +54,12 @@ function App() {
     fetchData();
   }, []);
 
-  console.log(profile);
   return (
     <div className="relative w-full h-full">
       <CustomCursor />
       <Header name={`${profile?.name}`} navLinks={navLinks} />
       <GalaxyBackground />
-      <div className="flex flex-col items-stretch h-full pt-12 z-20">
+      <div className="flex flex-col items-stretch h-full z-20 ">
         <div className="container mx-auto px-4 flex-grow">
           <div
             id="about"

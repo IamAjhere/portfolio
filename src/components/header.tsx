@@ -1,9 +1,11 @@
 import React from "react";
+import { useMediaQuery } from "react-responsive";
 import { Link, animateScroll } from "react-scroll";
 
 interface NavLink {
   label: string;
   href: string;
+  icon: string;
 }
 
 interface HeaderProps {
@@ -13,28 +15,47 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ name, logo, navLinks }) => {
+  const isMobile = useMediaQuery({ query: "(max-width: 640px)" });
+
   const scrollToTop = () => {
     animateScroll.scrollToTop({ duration: 1000 });
   };
   return (
-    <header className="text-white py-4 px-6 fixed top-0 left-0 w-full z-10 backdrop-blur-lg border-b border-gray-300 ">
+    <header className="text-white py-4 px-2 sm:px-6 fixed bottom-0 left-0 w-full z-10 backdrop-blur-lg border-t-2 border-b-0 border-gray-300 sm:border-t-0 sm:border-b-2 sm:top-0 sm:bottom-auto">
       <div className="container mx-auto flex justify-between items-center">
-        <div onClick={scrollToTop} className="nav-link hidden sm:flex">
+        <div
+          onClick={scrollToTop}
+          className="nav-link hidden sm:flex cursor-interactive"
+        >
           {logo ? <img src={logo} alt={name} /> : name}
         </div>
-        <div className="mx-auto sm:mx-0">
+        <div className={`mx-auto sm:mx-0  ${isMobile && "w-full"}`}>
           <nav>
-            <ul className="flex space-x-6">
+            <ul className="flex justify-around md:justify-start w-full items-center sm:space-x-6">
               {navLinks.map((navLink, index) => (
-                <li key={index}>
+                <li key={index} className="flex-grow-0">
                   <Link
                     to={navLink.href}
                     smooth={true}
                     duration={1000}
                     offset={-40}
-                    className="nav-link cursor-none"
+                    className="nav-link cursor-none block w-full text-center space-x-6"
                   >
-                    {navLink.label}
+                    {isMobile ? (
+                      <img
+                        src={navLink.icon}
+                        alt={navLink.label}
+                        className="flex sm:hidden mx-auto"
+                        style={{
+                          height: "30px",
+                          width: "30px",
+                          filter: "invert(1)",
+                          alignItems: "center",
+                        }}
+                      />
+                    ) : (
+                      <p className="hidden sm:flex">{navLink.label}</p>
+                    )}
                   </Link>
                 </li>
               ))}

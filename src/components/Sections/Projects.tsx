@@ -38,7 +38,7 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, formatRepoName }) => (
     <div className="mt-4 mb-2 flex items-center">
       <button
         onClick={() => window.open(repo.html_url, "_blank")}
-        className="text-xs sm:text-sm text-white bg-transparent border border-white rounded px-2 py-1 mr-2 transition duration-300 ease-in-out transform hover:scale-105"
+        className="text-xs cursor-none sm:text-sm text-white bg-transparent border border-white rounded px-2 py-1 mr-2 transition duration-300 ease-in-out transform hover:scale-105"
         style={{
           display: "flex",
           alignItems: "center",
@@ -70,7 +70,7 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, formatRepoName }) => (
       {repo.homepage && (
         <button
           onClick={() => window.open(repo.homepage, "_blank")}
-          className="text-xs sm:text-sm text-black bg-white border border-white rounded px-2 py-1 mr-2 transition duration-300 ease-in-out transform hover:scale-105"
+          className="text-xs cursor-none sm:text-sm text-black bg-white border border-white rounded px-2 py-1 mr-2 transition duration-300 ease-in-out transform hover:scale-105"
           style={{
             display: "flex",
             alignItems: "center",
