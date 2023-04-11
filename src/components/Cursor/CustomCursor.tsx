@@ -25,21 +25,35 @@ function CustomCursor() {
       }
     };
 
-    const buttons = document.querySelectorAll(".nav-link, button");
+    const attachListenersToButtons = () => {
+      const buttons = document.querySelectorAll(".nav-link, button");
 
-    buttons.forEach((button) => {
-      button.addEventListener("mouseenter", onMouseEnter);
-      button.addEventListener("mouseleave", onMouseLeave);
+      buttons.forEach((button) => {
+        button.addEventListener("mouseenter", onMouseEnter);
+        button.addEventListener("mouseleave", onMouseLeave);
+      });
+    };
+
+    const observer = new MutationObserver((mutationsList) => {
+      for (const mutation of mutationsList) {
+        if (mutation.type === "childList") {
+          attachListenersToButtons();
+        }
+      }
     });
+
+    observer.observe(document.body, { childList: true, subtree: true });
 
     document.addEventListener("mousemove", onMouseMove);
 
     return () => {
+      const buttons = document.querySelectorAll(".nav-link, button");
       buttons.forEach((button) => {
         button.removeEventListener("mouseenter", onMouseEnter);
         button.removeEventListener("mouseleave", onMouseLeave);
       });
       document.removeEventListener("mousemove", onMouseMove);
+      observer.disconnect();
     };
   }, []);
 
