@@ -12,6 +12,7 @@ export interface IProfile {
   public_repos: number;
   followers: number;
   following: number;
+  portfolioData: PortfolioData;
 }
 export interface IRepository {
   id: number;
@@ -23,4 +24,14 @@ export interface IRepository {
   stargazers_count: number;
   forks_count: number;
   homepage: string;
+}
+
+export interface PortfolioData {
+  about: {
+    job_title: string;
+    description: string;
+  };
+  skills: {
+    [category: string]: string[];
+  };
 }

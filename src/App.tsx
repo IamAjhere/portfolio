@@ -8,7 +8,7 @@ import Contact from "./components/Sections/Contact";
 import Projects from "./components/Sections/Projects";
 import Skills from "./components/Sections/Skills";
 import axios from "axios";
-import { IProfile, IRepository } from "./Types/GitTypes";
+import { IProfile, IRepository, PortfolioData } from "./Types/GitTypes";
 
 const navLinks = [
   {
@@ -39,12 +39,19 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [profileResponse, reposResponse] = await Promise.all([
-          axios.get("https://api.github.com/users/IamAjHere"),
-          axios.get("https://api.github.com/users/IamAjHere/repos"),
-        ]);
-        console.log(profileResponse);
-        setProfile(profileResponse.data);
+        const [profileResponse, reposResponse, portfolioDataResponse] =
+          await Promise.all([
+            axios.get("https://api.github.com/users/IamAjHere"),
+            axios.get("https://api.github.com/users/IamAjHere/repos"),
+            axios.get(
+              "https://raw.githubusercontent.com/IamAjhere/IamAjHere/main/portfoliodata.json"
+            ),
+          ]);
+        const combinedProfileData: IProfile = {
+          ...profileResponse.data,
+          portfolioData: portfolioDataResponse.data,
+        };
+        setProfile(combinedProfileData);
         setRepos(reposResponse.data);
       } catch (error) {
         console.error("Error fetching data:", error);
