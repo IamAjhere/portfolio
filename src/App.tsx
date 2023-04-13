@@ -51,7 +51,7 @@ function App() {
             axios.get("https://api.github.com/users/IamAjHere"),
             axios.get("https://api.github.com/users/IamAjHere/repos"),
             axios.get(
-              "https://raw.githubusercontent.com/IamAjhere/IamAjHere/main/portfoliodata.json"
+              "https://gist.githubusercontent.com/IamAjhere/2b4803a762983f5e4eda002e92b59682/raw"
             ),
           ]);
 
@@ -60,6 +60,7 @@ function App() {
           portfolioData: portfolioDataResponse.data,
         };
 
+        console.log(combinedProfileData);
         if (
           !localProfile ||
           JSON.stringify(localProfile) !== JSON.stringify(combinedProfileData)
