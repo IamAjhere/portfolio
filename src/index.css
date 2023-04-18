@@ -8,3 +8,10 @@
 .carousel .control-dots .dot {
   margin-bottom: 5px;
 }
+.invert {
+  filter: invert(1);
+}
+
+.hover\:no-invert:hover .invert {
+  filter: invert(0);
+}
