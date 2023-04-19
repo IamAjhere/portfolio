@@ -75,7 +75,7 @@ function Contact() {
     const message = messageField.value;
 
     try {
-      const response = await fetch("/.netlify/functions/greeting", {
+      const response = await fetch("/.netlify/functions/sendMail", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
