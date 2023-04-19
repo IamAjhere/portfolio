@@ -77,7 +77,7 @@ const SkillCategory: React.FC<SkillCategoryProps> = ({
   return (
     <div className="mt-4">
       <div
-        className="flex items-center text-sm font-medium mb-2 nav-link select-none"
+        className="flex items-center text-sm font-medium mb-2 nav-link select-none "
         onClick={() => handleToggleSkills(categoryTitle)}
       >
         <span
@@ -126,12 +126,12 @@ const Skills: React.FC<SkillsProps> = ({ profile, leetSkills }) => {
   return (
     <div className="min-h-screen flex-grow">
       <div className="w-full h-full flex flex-col items-center justify-center p-4">
-        <h1 className="text-4xl mt-1 sm:mt-1 sm:text-6xl font-bold text-center text-white mb-4">
+        <h1 className="text-4xl mt-2 sm:mt-1 sm:text-6xl font-bold text-center text-white mb-4">
           Skills
         </h1>
-        <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
-          <div className="bg-black rounded-lg p-6 border border-white shadow-lg flex flex-col">
-            <h2 className="text-2xl font-bold sm:mb-4 text-center  text-white">
+        <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 gap-10 mb-8">
+          <div className="bg-black rounded-lg p-6 border border-white shadow-lg flex flex-col custom-shadow">
+            <h2 className="text-2xl font-bold sm:mb-4 text-center  text-white ">
               Leet Coding Skills
             </h2>
             <div className="sm:mt-8 w-full max-w-3xl mx-auto flex-grow  text-white">
@@ -155,7 +155,7 @@ const Skills: React.FC<SkillsProps> = ({ profile, leetSkills }) => {
               />
             </div>
           </div>
-          <div className="bg-black rounded-lg p-6 border border-white shadow-lg flex flex-col">
+          <div className="bg-black rounded-lg p-6 border border-white shadow-lg flex flex-col custom-shadow">
             <h2 className="text-2xl font-bold mb-4 text-center text-white">
               Overall Skills
             </h2>

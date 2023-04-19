@@ -12,7 +12,15 @@ const About: React.FC<AboutProps> = ({ profile }) => {
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center sm:p-4 sm:mt-[-32]">
-      <div className="rounded-full overflow-hidden w-48 h-48 ">
+      <div
+        className="rounded-full overflow-hidden w-48 h-48"
+        style={{
+          background: "rgba(0, 0, 0, 0.7)",
+          border: "2px solid white",
+          color: "white",
+          backdropFilter: "blur(10px)",
+        }}
+      >
         <img
           src={profile.avatar_url}
           alt={profile.name}
@@ -26,10 +34,10 @@ const About: React.FC<AboutProps> = ({ profile }) => {
         {profile.portfolioData.about.job_title}
       </p>
       <div
-        className="bg-black rounded-lg p-4 sm:p-10 mx-4 sm:mx-32  shadow-lg text-sm sm:text-lg text-center text-white"
+        className="bg-black rounded-lg p-4 sm:p-10 mx-4 sm:mx-32 custom-shadow  shadow-lg text-sm sm:text-lg text-center text-white"
         style={{
-          background: "rgba(0, 0, 0, 0.6)",
-          border: "1px solid white",
+          background: "rgba(0, 0, 0, 0.7)",
+          border: "2px solid white",
           color: "white",
           backdropFilter: "blur(10px)",
         }}

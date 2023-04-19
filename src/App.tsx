@@ -178,7 +178,7 @@ function App() {
       <CustomCursor />
       <Header name={`${profile?.name}`} navLinks={navLinks} />
       <GalaxyBackground />
-      <div className="flex flex-col items-stretch h-full z-20 ">
+      <div className="flex flex-col items-stretch h-full z-20 mb-32 ">
         <div className="container mx-auto px-4 flex-grow">
           <div
             id="about"

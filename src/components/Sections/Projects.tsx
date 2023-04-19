@@ -21,7 +21,7 @@ interface RepoCardProps {
 
 const RepoCard: React.FC<RepoCardProps> = ({ repo, formatRepoName }) => (
   <div
-    className="m-2 w-80 h-96 sm:w-80 sm:h-72 p-4 rounded-lg shadow flex flex-col"
+    className="m-4 w-80 h-96 sm:w-80 sm:h-72 p-4 rounded-lg shadow custom-shadow flex flex-col"
     style={{
       background: "rgba(0, 0, 0, 0.7)",
       border: "2px solid white",
@@ -38,7 +38,7 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, formatRepoName }) => (
     <div className="mt-4 mb-2 flex items-center">
       <button
         onClick={() => window.open(repo.html_url, "_blank")}
-        className="text-xs cursor-none sm:text-sm text-white bg-transparent border border-white rounded px-2 py-1 mr-2 transition duration-300 ease-in-out transform hover:scale-105"
+        className="text-xs custom-shadow-hover cursor-none sm:text-sm text-white bg-transparent border border-white rounded px-2 py-1 mr-2 transition duration-300 ease-in-out transform hover:scale-105"
         style={{
           display: "flex",
           alignItems: "center",

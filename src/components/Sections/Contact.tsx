@@ -37,7 +37,7 @@ const SocialLink: React.FC<{
     href={href}
     target="_blank"
     rel="noopener noreferrer"
-    className="flex items-center justify-center text-white bg-transparent border nav-link border-white rounded px-3 py-2 transition duration-300 ease-in-out transform hover:bg-white hover:text-black hover:no-invert"
+    className="flex items-center justify-center custom-shadow text-white bg-transparent border nav-link border-white rounded px-3 py-2 transition duration-500 ease-in-out transform hover:bg-white custom-shadow-black hover:text-black hover:no-invert"
   >
     <img
       src={icon}
@@ -66,7 +66,15 @@ function Contact() {
 
   return (
     <div className="w-full h-full flex items-center justify-center">
-      <div className="w-full max-w-4xl mx-auto border rounded-sm p-8 bg-opacity-40 bg-black backdrop-blur-md">
+      <div
+        className="w-full mx-4 my-14 max-w-4xl border rounded-lg p-8 bg-opacity-40 bg-black backdrop-blur-md custom-shadow"
+        style={{
+          background: "rgba(0, 0, 0, 0.7)",
+          border: "2px solid white",
+          color: "white",
+          backdropFilter: "blur(10px)",
+        }}
+      >
         <h1 className="text-4xl font-bold text-white text-center mb-8">
           Contact Me
         </h1>
@@ -75,16 +83,14 @@ function Contact() {
             <form className="space-y-4">
               <div>
                 <label
-                  className="block text-white font-bold mb-2 transition-all duration-300"
+                  className="block text-white font-bold mb-2 transition-all duration-300 "
                   htmlFor="name"
                 >
                   Name
                 </label>
                 <input
-                  className={`w-full bg-black border-2 p-2 rounded-md text-white focus:outline-none transition-border duration-200 ${
-                    isNameInvalid
-                      ? "border-red-500"
-                      : "border-white focus:border-4"
+                  className={`w-full bg-black border-2 p-2 rounded-md custom-shadow-focus text-white focus:outline-none  transition-border duration-500 ${
+                    isNameInvalid ? "border-red-500" : "border-white "
                   }`}
                   type="text"
                   id="name"
@@ -102,10 +108,8 @@ function Contact() {
                   Email
                 </label>
                 <input
-                  className={`w-full bg-black border-2 p-2 rounded-md text-white focus:outline-none transition-border duration-200 ${
-                    emailValid
-                      ? "border-white focus:border-4"
-                      : "border-red-500"
+                  className={`w-full bg-black border-2 p-2 rounded-md custom-shadow-focus text-white focus:outline-none transition-border duration-500 ${
+                    emailValid ? "border-white" : "border-red-500"
                   }`}
                   type="email"
                   id="email"
@@ -122,10 +126,8 @@ function Contact() {
                   Message
                 </label>
                 <textarea
-                  className={`w-full bg-black border-2 p-2 rounded-md text-white focus:outline-none transition-border duration-200 resize-none ${
-                    isMessageInvalid
-                      ? "border-red-500"
-                      : "border-white focus:border-4"
+                  className={`w-full bg-black border-2 p-2 rounded-md custom-shadow-focus text-white focus:outline-none transition-border duration-500 resize-none ${
+                    isMessageInvalid ? "border-red-500" : "border-white"
                   }`}
                   id="message"
                   name="message"
@@ -137,18 +139,18 @@ function Contact() {
               <div className="flex justify-center md:justify-start">
                 <button
                   type="submit"
-                  className="bg-white text-black border border-black font-bold py-2 px-4 rounded transition duration-200 hover:bg-black hover:text-white hover:border-white"
+                  className="bg-white custom-shadow-hover text-black border border-black font-bold py-2 px-4 rounded transition duration-500 hover:bg-black hover:text-white hover:border-white"
                 >
                   Send Message
                 </button>
               </div>
             </form>
           </div>
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col  sm:items-center">
             <h2 className="text-2xl font-bold text-white mb-4">
               Connect with me
             </h2>
-            <div className="mt-4 mb-2 flex flex-col space-y-3">
+            <div className="mt-4 mb-2 flex flex-col space-y-3 ">
               <SocialLink
                 href="https://github.com/IamAjHere"
                 icon={githubIcon}

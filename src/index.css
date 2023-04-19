@@ -15,3 +15,15 @@
 .hover\:no-invert:hover .invert {
   filter: invert(0);
 }
+.custom-shadow {
+  box-shadow: 4px 4px 0px white;
+}
+.custom-shadow-focus:focus {
+  box-shadow: 4px 4px 0px white;
+}
+.custom-shadow-hover:hover {
+  box-shadow: 4px 4px 0px white;
+}
+.custom-shadow-black:hover {
+  box-shadow: 4px 4px 0px black;
+}
