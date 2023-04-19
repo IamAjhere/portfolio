@@ -3,7 +3,7 @@ import githubIcon from "../../assets/github icon.png";
 import linkedinIcon from "../../assets/linkedin-icon.png";
 import leetcodeIcon from "../../assets/leetcode-icon.png";
 import instagramIcon from "../../assets/instagram-icon.png";
-
+import queryString from "query-string";
 const EMAIL_PATTERN = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 function useFormField(initialValue = "") {
@@ -67,12 +67,17 @@ function Contact() {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
     const formData = new FormData(form);
+    const data: Record<string, string> = {};
+
+    for (const [key, value] of formData.entries()) {
+      data[key] = value as string;
+    }
 
     fetch(form.action, {
       method: "POST",
-      body: formData,
+      body: queryString.stringify(data),
       headers: {
-        Accept: "application/x-www-form-urlencoded;charset=UTF-8",
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
       },
     })
       .then(() => {
