@@ -80,7 +80,8 @@ function Contact() {
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="md:col-span-2">
-            <form className="space-y-4" data-netlify="true">
+            <form className="space-y-4" data-netlify="true" method="POST">
+              <input type="hidden" name="form-name" value="contact" />
               <div>
                 <label
                   className="block text-white font-bold mb-2 transition-all duration-300 "
