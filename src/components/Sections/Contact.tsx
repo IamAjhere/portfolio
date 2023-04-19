@@ -63,7 +63,23 @@ function Contact() {
   const isNameInvalid = nameField.touched && nameField.value.trim() === "";
   const isMessageInvalid =
     messageField.touched && messageField.value.trim() === "";
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
 
+    const myForm = event.currentTarget;
+    const formData = new FormData(myForm);
+    const data: Record<string, string> = {};
+
+    formData.forEach((value, key) => {
+      data[key] = value as string;
+    });
+
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(data).toString(),
+    }).catch((error) => alert(error));
+  };
   return (
     <div className="w-full h-full flex items-center justify-center">
       <div
@@ -85,6 +101,7 @@ function Contact() {
               className="space-y-4"
               data-netlify="true"
               method="POST"
+              onSubmit={handleSubmit}
             >
               <input type="hidden" name="form-name" value="contact" />
               <div>
