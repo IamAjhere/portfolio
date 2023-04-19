@@ -63,6 +63,39 @@ function Contact() {
   const isNameInvalid = nameField.touched && nameField.value.trim() === "";
   const isMessageInvalid =
     messageField.touched && messageField.value.trim() === "";
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    if (!emailValid || isNameInvalid || isMessageInvalid) {
+      return;
+    }
+
+    const name = nameField.value;
+    const email = emailField.value;
+    const message = messageField.value;
+
+    try {
+      const response = await fetch("/.netlify/functions/greeting", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data.message);
+        // Show a success message or perform other actions as needed
+      } else {
+        console.error("Error sending data to the serverless function.");
+        // Show an error message or perform other actions as needed
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      // Show an error message or perform other actions as needed
+    }
+  }
 
   return (
     <div className="w-full h-full flex items-center justify-center">
@@ -80,7 +113,7 @@ function Contact() {
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="md:col-span-2">
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
                 <label
                   className="block text-white font-bold mb-2 transition-all duration-300 "
