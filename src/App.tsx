@@ -13,7 +13,7 @@ import {
   GITHUB_USER_API_URL,
   STATIC_DATA_RAW,
   YOUR_NETLIFY_FUNCTION_URL,
-} from "../constants";
+} from "./constants";
 
 const navLinks = [
   {

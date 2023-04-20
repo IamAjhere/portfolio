@@ -1,9 +1,28 @@
 const axios = require("axios");
-const {
-  LEETCODE_SKILLS_GRAPHQL,
-  LEETCODE_USERNAME,
-  LEETCODE_SKILLS_QUERY,
-} = require("../constants"); // Update the import path to match your file structure
+
+//Leetcode data for serverless
+export const LEETCODE_SKILLS_GRAPHQL = "https://leetcode.com/graphql/";
+export const LEETCODE_USERNAME = "IamAjHere";
+export const LEETCODE_SKILLS_QUERY = `
+  query skillStats($username: String!) {
+    matchedUser(username: $username) {
+      tagProblemCounts {
+        advanced {
+          tagName
+          problemsSolved
+        }
+        intermediate {
+          tagName
+          problemsSolved
+        }
+        fundamental {
+          tagName
+          problemsSolved
+        }
+      }
+    }
+  }
+`;
 
 const handler = async (event, context) => {
   if (event.httpMethod === "GET") {
