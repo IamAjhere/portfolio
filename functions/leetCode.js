@@ -3,7 +3,7 @@ const {
   LEETCODE_SKILLS_GRAPHQL,
   LEETCODE_USERNAME,
   LEETCODE_SKILLS_QUERY,
-} = require("../src/constants"); // Update the import path to match your file structure
+} = require("../constants"); // Update the import path to match your file structure
 
 const handler = async (event, context) => {
   if (event.httpMethod === "GET") {
