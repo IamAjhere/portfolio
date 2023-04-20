@@ -1,9 +1,9 @@
 const axios = require("axios");
 
-//Leetcode data for serverless
-export const LEETCODE_SKILLS_GRAPHQL = "https://leetcode.com/graphql/";
-export const LEETCODE_USERNAME = "IamAjHere";
-export const LEETCODE_SKILLS_QUERY = `
+// Leetcode data for serverless
+const LEETCODE_SKILLS_GRAPHQL = "https://leetcode.com/graphql/";
+const LEETCODE_USERNAME = "IamAjHere";
+const LEETCODE_SKILLS_QUERY = `
   query skillStats($username: String!) {
     matchedUser(username: $username) {
       tagProblemCounts {
