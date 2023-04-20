@@ -81,7 +81,7 @@ function Contact() {
     }).catch((error) => alert(error));
   };
   return (
-    <div className="w-full h-full flex items-center justify-center">
+    <div className="w-full h-full flex items-center justify-center mb-16">
       <div
         className="w-full mx-4 my-14 max-w-4xl border rounded-lg p-8 bg-opacity-40 bg-black backdrop-blur-md custom-shadow"
         style={{
@@ -91,8 +91,12 @@ function Contact() {
           backdropFilter: "blur(10px)",
         }}
       >
-        <h1 className="text-4xl font-bold text-white text-center mb-8">
-          Contact Me
+        <h1 className="text-4xl mt-1 sm:mt-1 sm:text-6xl font-bold text-center text-white mb-4">
+          {"Contact".split("").map((letter, index) => (
+            <span key={`hello-${index}`} className="letter-stroke">
+              {letter}
+            </span>
+          ))}
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="md:col-span-2">
@@ -169,7 +173,7 @@ function Contact() {
               </div>
             </form>
           </div>
-          <div className="flex flex-col  sm:items-center">
+          <div className="flex flex-col items-center mt-8 md:mt-0">
             <h2 className="text-2xl font-bold text-white mb-4">
               Connect with me
             </h2>

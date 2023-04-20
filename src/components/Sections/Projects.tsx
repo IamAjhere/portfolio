@@ -151,7 +151,11 @@ const Projects: React.FC<ProjectsProps> = ({ repos, login }) => {
   return (
     <div className="w-full h-full flex flex-col items-center justify-center text-black px-2 py-2 ">
       <h1 className="text-4xl mt-1 sm:mt-1 sm:text-6xl font-bold text-center text-white mb-4">
-        Projects
+        {"Project".split("").map((letter, index) => (
+          <span key={`hello-${index}`} className="letter-stroke">
+            {letter}
+          </span>
+        ))}
       </h1>
       <div className="w-full flex flex-wrap items-center justify-center">
         <Carousel

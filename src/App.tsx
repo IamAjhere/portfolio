@@ -14,6 +14,7 @@ import {
   STATIC_DATA_RAW,
   YOUR_NETLIFY_FUNCTION_URL,
 } from "./constants";
+import LoadingSpinner from "./components/LoadingSpinner";
 
 const navLinks = [
   {
@@ -43,31 +44,40 @@ function App() {
   const [leetCodeSkills, setLeetCodeSkills] = useState<ILeetSkills | null>(
     null
   );
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const apiCalls = [
+          axios.get(GITHUB_USER_API_URL),
+          axios.get(GITHUB_USER_API_URL + "/repos"),
+          axios.get(STATIC_DATA_RAW),
+        ];
+        console.log(process.env.NODE_ENV);
+        if (process.env.NODE_ENV !== "development") {
+          apiCalls.push(axios.get(YOUR_NETLIFY_FUNCTION_URL));
+        }
+
         const [
           profileResponse,
           reposResponse,
           portfolioDataResponse,
           leetCodeSkill,
-        ] = await Promise.all([
-          axios.get(GITHUB_USER_API_URL),
-          axios.get(GITHUB_USER_API_URL + "/repos"),
-          axios.get(STATIC_DATA_RAW),
-          axios.get(YOUR_NETLIFY_FUNCTION_URL),
-        ]);
+        ] = await Promise.all(apiCalls);
 
         const combinedProfileData: IProfile = {
           ...profileResponse.data,
           portfolioData: portfolioDataResponse.data,
         };
 
-        setLeetCodeSkills(leetCodeSkill.data);
+        if (leetCodeSkill) {
+          setLeetCodeSkills(leetCodeSkill.data);
+        }
+
         setRepos(reposResponse.data);
         setProfile(combinedProfileData);
-        console.log(leetCodeSkills);
+        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -76,95 +86,9 @@ function App() {
     fetchData();
   }, []);
 
-  const leetSkills: ILeetSkills = {
-    advanced: [
-      {
-        tagName: "Backtracking",
-        problemsSolved: 1,
-      },
-      {
-        tagName: "Dynamic Programming",
-        problemsSolved: 3,
-      },
-      {
-        tagName: "Divide and Conquer",
-        problemsSolved: 1,
-      },
-      {
-        tagName: "Union Find",
-        problemsSolved: 1,
-      },
-    ],
-    intermediate: [
-      {
-        tagName: "Tree",
-        problemsSolved: 2,
-      },
-      {
-        tagName: "Binary Tree",
-        problemsSolved: 2,
-      },
-      {
-        tagName: "Hash Table",
-        problemsSolved: 4,
-      },
-      {
-        tagName: "Graph",
-        problemsSolved: 1,
-      },
-      {
-        tagName: "Binary Search",
-        problemsSolved: 5,
-      },
-      {
-        tagName: "Depth-First Search",
-        problemsSolved: 5,
-      },
-      {
-        tagName: "Breadth-First Search",
-        problemsSolved: 6,
-      },
-      {
-        tagName: "Recursion",
-        problemsSolved: 1,
-      },
-      {
-        tagName: "Sliding Window",
-        problemsSolved: 2,
-      },
-      {
-        tagName: "Math",
-        problemsSolved: 4,
-      },
-    ],
-    fundamental: [
-      {
-        tagName: "Array",
-        problemsSolved: 11,
-      },
-      {
-        tagName: "Matrix",
-        problemsSolved: 3,
-      },
-      {
-        tagName: "String",
-        problemsSolved: 6,
-      },
-      {
-        tagName: "Sorting",
-        problemsSolved: 1,
-      },
-      {
-        tagName: "Linked List",
-        problemsSolved: 4,
-      },
-      {
-        tagName: "Two Pointers",
-        problemsSolved: 9,
-      },
-    ],
-  };
-
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
   return (
     <div className="relative w-full h-full">
       <CustomCursor />
@@ -172,25 +96,16 @@ function App() {
       <GalaxyBackground />
       <div className="flex flex-col items-stretch h-full z-20 mb-32 ">
         <div className="container mx-auto px-4 flex-grow">
-          <div
-            id="about"
-            className="h-screen border-l-2 border-r-2 border-white"
-          >
+          <div id="about" className="min-h-screen md:h-screen  ">
             <About profile={profile} />
           </div>
-          <div
-            id="projects"
-            className="h-screen border-l-2 border-r-2 border-white"
-          >
+          <div id="projects" className="min-h-screen md:h-screen ">
             <Projects repos={repos} login={profile?.login} />
           </div>
-          <div id="skills" className=" border-l-2 border-r-2 border-white ">
-            <Skills profile={profile} leetSkills={leetSkills} />
+          <div id="skills" className="min-h-screen md:h-screen  ">
+            <Skills profile={profile} leetSkills={leetCodeSkills} />
           </div>
-          <div
-            id="contact"
-            className="h-screen border-l-2 border-r-2 border-white"
-          >
+          <div id="contact" className="min-h-screen md:h-screen  ">
             <Contact />
           </div>
         </div>

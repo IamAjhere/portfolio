@@ -18,6 +18,9 @@
 .custom-shadow {
   box-shadow: 4px 4px 0px white;
 }
+.custom-shadow-2px {
+  box-shadow: 2px 2px 0px white;
+}
 .custom-shadow-focus:focus {
   box-shadow: 4px 4px 0px white;
 }
@@ -26,4 +29,9 @@
 }
 .custom-shadow-black:hover {
   box-shadow: 4px 4px 0px black;
+}
+.letter-stroke {
+  -webkit-text-stroke: 1px white;
+  text-shadow: 3px 3px 0px white;
+  color: black;
 }

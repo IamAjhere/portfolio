@@ -28,7 +28,16 @@ const About: React.FC<AboutProps> = ({ profile }) => {
         />
       </div>
       <h1 className="text-4xl sm:text-6xl font-bold text-center text-white mb-4">
-        Hello! I'm {profile.name}
+        {"Hello! I'm ".split("").map((letter, index) => (
+          <span key={`hello-${index}`} className="letter-stroke">
+            {letter}
+          </span>
+        ))}
+        {profile.name.split("").map((letter, index) => (
+          <span key={index} className="letter-stroke">
+            {letter}
+          </span>
+        ))}
       </h1>
       <p className="text-lg sm:text-xl text-center text-white mx-4 sm:mx-8 mb-4">
         {profile.portfolioData.about.job_title}

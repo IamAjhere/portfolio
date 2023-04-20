@@ -10,14 +10,14 @@ interface StaticSkillCategoryProps {
 
 interface SkillCategoryProps {
   categoryTitle: string;
-  skills: ISkill[];
+  skills: ISkill[] | null | undefined;
   isOpen: boolean;
   handleToggleSkills: (categoryTitle: string) => void;
 }
 
 interface SkillsProps {
   profile: IProfile | null;
-  leetSkills: ILeetSkills;
+  leetSkills: ILeetSkills | null;
 }
 
 const StaticSkillCategory: React.FC<StaticSkillCategoryProps> = ({
@@ -57,7 +57,7 @@ const StaticSkillCategory: React.FC<StaticSkillCategoryProps> = ({
             className="flex items-center text-xs my-2 mr-2 select-none"
           >
             <span className="inline-block">
-              <span className="inline-flex items-center px-2 py-1 whitespace-nowrap leading-6 rounded-full bg-white text-black transition-all duration-200 hover:bg-gray-100">
+              <span className="inline-flex items-center px-2 py-1 whitespace-nowrap leading-6 rounded-full text-white bg-black border custom-shadow-2px transition-all duration-200 ">
                 {skill}
               </span>
             </span>
@@ -94,7 +94,7 @@ const SkillCategory: React.FC<SkillCategoryProps> = ({
           isOpen ? "max-h-2rows" : "max-h-0"
         }`}
       >
-        {skills.map((skill) => (
+        {skills?.map((skill) => (
           <div
             key={skill.tagName}
             className="flex items-center text-xs my-2 mr-2 select-none"
@@ -124,10 +124,14 @@ const Skills: React.FC<SkillsProps> = ({ profile, leetSkills }) => {
   };
 
   return (
-    <div className="min-h-screen flex-grow">
+    <div className="min-h-screen flex-grow sm:pt-10">
       <div className="w-full h-full flex flex-col items-center justify-center p-4">
-        <h1 className="text-4xl mt-2 sm:mt-1 sm:text-6xl font-bold text-center text-white mb-4">
-          Skills
+        <h1 className="text-4xl sm:mt-1 sm:text-6xl font-bold text-center text-white mb-4">
+          {"Skills".split("").map((letter, index) => (
+            <span key={`hello-${index}`} className="letter-stroke">
+              {letter}
+            </span>
+          ))}
         </h1>
         <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 gap-10 mb-8">
           <div className="bg-black rounded-lg p-6 border border-white shadow-lg flex flex-col custom-shadow">
@@ -137,19 +141,19 @@ const Skills: React.FC<SkillsProps> = ({ profile, leetSkills }) => {
             <div className="sm:mt-8 w-full max-w-3xl mx-auto flex-grow  text-white">
               <SkillCategory
                 categoryTitle="Advanced"
-                skills={leetSkills.advanced}
+                skills={leetSkills?.advanced}
                 isOpen={openCategory === "Advanced"}
                 handleToggleSkills={handleToggleSkills}
               />
               <SkillCategory
                 categoryTitle="Intermediate"
-                skills={leetSkills.intermediate}
+                skills={leetSkills?.intermediate}
                 isOpen={openCategory === "Intermediate"}
                 handleToggleSkills={handleToggleSkills}
               />
               <SkillCategory
                 categoryTitle="Fundamental"
-                skills={leetSkills.fundamental}
+                skills={leetSkills?.fundamental}
                 isOpen={openCategory === "Fundamental"}
                 handleToggleSkills={handleToggleSkills}
               />
