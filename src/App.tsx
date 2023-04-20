@@ -8,7 +8,12 @@ import Contact from "./components/Sections/Contact";
 import Projects from "./components/Sections/Projects";
 import Skills from "./components/Sections/Skills";
 import axios from "axios";
-import { ILeetSkills, IProfile, IRepository } from "./Types/GitTypes";
+import { IProfile, IRepository, ILeetSkills } from "./Types/GitTypes";
+import {
+  GITHUB_USER_API_URL,
+  STATIC_DATA_RAW,
+  YOUR_NETLIFY_FUNCTION_URL,
+} from "./constants";
 
 const navLinks = [
   {
@@ -35,47 +40,34 @@ const navLinks = [
 function App() {
   const [profile, setProfile] = useState<IProfile | null>(null);
   const [repos, setRepos] = useState<IRepository[] | null>(null);
+  const [leetCodeSkills, setLeetCodeSkills] = useState<ILeetSkills | null>(
+    null
+  );
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const localProfile = localStorage.getItem("profile");
-        const localRepos = localStorage.getItem("repos");
+        const [
+          profileResponse,
+          reposResponse,
+          portfolioDataResponse,
+          leetCodeSkill,
+        ] = await Promise.all([
+          axios.get(GITHUB_USER_API_URL),
+          axios.get(GITHUB_USER_API_URL + "/repos"),
+          axios.get(STATIC_DATA_RAW),
+          axios.get(YOUR_NETLIFY_FUNCTION_URL),
+        ]);
 
-        if (localProfile && localRepos) {
-          setProfile(JSON.parse(localProfile));
-          setRepos(JSON.parse(localRepos));
-        }
-
-        const [profileResponse, reposResponse, portfolioDataResponse] =
-          await Promise.all([
-            axios.get("https://api.github.com/users/IamAjHere"),
-            axios.get("https://api.github.com/users/IamAjHere/repos"),
-            axios.get(
-              "https://gist.githubusercontent.com/IamAjhere/2b4803a762983f5e4eda002e92b59682/raw"
-            ),
-          ]);
-
-        const combinedProfileData = {
+        const combinedProfileData: IProfile = {
           ...profileResponse.data,
           portfolioData: portfolioDataResponse.data,
         };
 
-        console.log(combinedProfileData);
-        if (
-          !localProfile ||
-          JSON.stringify(localProfile) !== JSON.stringify(combinedProfileData)
-        ) {
-          localStorage.setItem("profile", JSON.stringify(combinedProfileData));
-          setProfile(combinedProfileData);
-        }
-
-        if (
-          !localRepos ||
-          JSON.stringify(localRepos) !== JSON.stringify(reposResponse.data)
-        ) {
-          localStorage.setItem("repos", JSON.stringify(reposResponse.data));
-          setRepos(reposResponse.data);
-        }
+        setLeetCodeSkills(leetCodeSkill.data);
+        setRepos(reposResponse.data);
+        setProfile(combinedProfileData);
+        console.log(leetCodeSkills);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
