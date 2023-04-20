@@ -1,9 +1,9 @@
-const axios = require("axios");
+const fetch = require("node-fetch");
 
 //Leetcode data for serverless
-export const LEETCODE_SKILLS_GRAPHQL = "https://leetcode.com/graphql/";
-export const LEETCODE_USERNAME = "IamAjHere";
-export const LEETCODE_SKILLS_QUERY = `
+const LEETCODE_SKILLS_GRAPHQL = "https://leetcode.com/graphql/";
+const LEETCODE_USERNAME = "IamAjHere";
+const LEETCODE_SKILLS_QUERY = `
   query skillStats($username: String!) {
     matchedUser(username: $username) {
       tagProblemCounts {
@@ -27,18 +27,26 @@ export const LEETCODE_SKILLS_QUERY = `
 const handler = async (event, context) => {
   if (event.httpMethod === "GET") {
     try {
-      const response = await axios.post(LEETCODE_SKILLS_GRAPHQL, {
-        query: LEETCODE_SKILLS_QUERY,
-        variables: { username: LEETCODE_USERNAME },
+      const response = await fetch(LEETCODE_SKILLS_GRAPHQL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          query: LEETCODE_SKILLS_QUERY,
+          variables: { username: LEETCODE_USERNAME },
+        }),
       });
 
+      const data = await response.json();
+
       if (
-        response.data &&
-        response.data.data &&
-        response.data.data.matchedUser &&
-        response.data.data.matchedUser.tagProblemCounts
+        data &&
+        data.data &&
+        data.data.matchedUser &&
+        data.data.matchedUser.tagProblemCounts
       ) {
-        const skills = response.data.data.matchedUser.tagProblemCounts;
+        const skills = data.data.matchedUser.tagProblemCounts;
 
         return {
           statusCode: 200,
