@@ -100,7 +100,7 @@ const SkillCategory: React.FC<SkillCategoryProps> = ({
             className="flex items-center text-xs my-2 mr-2 select-none"
           >
             <span className="inline-block">
-              <span className="inline-flex items-center px-2 py-1 whitespace-nowrap leading-6 rounded-full bg-white text-black transition-all duration-200 hover:bg-gray-100">
+              <span className="inline-flex items-center px-2 py-1 whitespace-nowrap leading-6 rounded-full text-white bg-black border custom-shadow-2px transition-all duration-200 ">
                 {skill.tagName}
               </span>
             </span>
