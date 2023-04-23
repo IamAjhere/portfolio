@@ -55,7 +55,10 @@ const handler = async (event, context) => {
         response.data.data.matchedUser.tagProblemCounts
       ) {
         const skills = response.data.data.matchedUser.tagProblemCounts;
-
+        cache = {
+          timestamp: currentTime,
+          data: skills,
+        };
         return {
           statusCode: 200,
           body: JSON.stringify(skills),
