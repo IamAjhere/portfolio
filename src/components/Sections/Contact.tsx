@@ -25,7 +25,12 @@ function useFormField(initialValue = "") {
     setTouched(false);
   };
 
-  return { value, touched, onChange, onBlur, onFocus };
+  const reset = () => {
+    setValue(initialValue);
+    setTouched(false);
+  };
+
+  return { value, touched, onChange, onBlur, onFocus, reset };
 }
 
 const SocialLink: React.FC<{
@@ -77,7 +82,9 @@ function Contact() {
     const myForm = event.currentTarget;
     const formData = new FormData(myForm);
     const searchParams = new URLSearchParams();
-
+    if (formData.get("bot-field")) {
+      return;
+    }
     for (const [key, value] of formData) {
       searchParams.append(key, value as string);
     }
@@ -113,7 +120,9 @@ function Contact() {
           type: "error",
         });
       });
-
+    nameField.reset();
+    emailField.reset();
+    messageField.reset();
     setTimeout(() => {
       setToast({ show: false, message: "", type: "" });
     }, 3000);
@@ -143,10 +152,12 @@ function Contact() {
               name="contact"
               className="space-y-4"
               data-netlify="true"
+              data-netlify-honeypot="bot-field"
               method="POST"
               onSubmit={handleSubmit}
             >
               <input type="hidden" name="form-name" value="contact" />
+              <input type="hidden" name="bot-field" />
               <div>
                 <label
                   className="block text-white font-bold mb-2 transition-all duration-300 "
