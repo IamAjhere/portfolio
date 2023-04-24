@@ -11,7 +11,7 @@ const About: React.FC<AboutProps> = ({ profile }) => {
   }
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center sm:p-4 sm:mt-[-32]">
+    <div className="w-full h-full flex flex-col pt-10 items-center justify-center sm:p-4 sm:mt-[-32]">
       <div
         className="rounded-full overflow-hidden w-48 h-48"
         style={{

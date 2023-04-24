@@ -55,7 +55,6 @@ const Header: React.FC<HeaderProps> = ({ name, logo, navLinks }) => {
                         style={{
                           height: "30px",
                           width: "30px",
-                          filter: "invert(1)",
                           alignItems: "center",
                         }}
                       />

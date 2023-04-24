@@ -15,27 +15,31 @@ import {
   YOUR_NETLIFY_FUNCTION_URL,
 } from "./constants";
 import LoadingSpinner from "./components/LoadingSpinner";
+import gearIcon from "./assets/gear-icon.png";
+import gitIcon from "./assets/git-Icon.png";
+import maleuserIcon from "./assets/maleuser-icon.png";
+import messageIcon from "./assets/message-icon.png";
 
 const navLinks = [
   {
     label: "About",
     href: "about",
-    icon: "https://img.icons8.com/ios-filled/50/000000/user-male-circle.png",
+    icon: maleuserIcon,
   },
   {
     label: "Projects",
     href: "projects",
-    icon: "https://img.icons8.com/ios-filled/50/null/git.png",
+    icon: gitIcon,
   },
   {
     label: "Skills",
     href: "skills",
-    icon: "https://img.icons8.com/ios-filled/50/null/gear.png",
+    icon: gearIcon,
   },
   {
     label: "Contact",
     href: "contact",
-    icon: "https://img.icons8.com/android/24/null/filled-message.png",
+    icon: messageIcon,
   },
 ];
 function App() {
