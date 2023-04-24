@@ -63,22 +63,32 @@ function Contact() {
   const isNameInvalid = nameField.touched && nameField.value.trim() === "";
   const isMessageInvalid =
     messageField.touched && messageField.value.trim() === "";
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+  const [toast, setToast] = useState({ show: false, message: "" });
+
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
+    const formData = new FormData(event.target);
 
-    const myForm = event.currentTarget;
-    const formData = new FormData(myForm);
-    const data: Record<string, string> = {};
+    try {
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "multipart/form-data" },
+        body: formData,
+      });
 
-    formData.forEach((value, key) => {
-      data[key] = value as string;
-    });
+      if (response.ok) {
+        setToast({ show: true, message: "Message sent successfully!" });
+        event.target.reset();
+      } else {
+        setToast({ show: true, message: "Error sending message." });
+      }
+    } catch (error) {
+      setToast({ show: true, message: "Error sending message." });
+    }
 
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(data).toString(),
-    }).catch((error) => alert(error));
+    setTimeout(() => {
+      setToast({ show: false, message: "" });
+    }, 3000);
   };
   return (
     <div className="w-full h-full flex items-center justify-center mb-16">
@@ -105,6 +115,7 @@ function Contact() {
               className="space-y-4"
               data-netlify="true"
               method="POST"
+              onSubmit={handleSubmit}
             >
               <input type="hidden" name="form-name" value="contact" />
               <div>
