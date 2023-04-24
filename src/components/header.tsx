@@ -11,10 +11,35 @@ interface NavLink {
 interface HeaderProps {
   name: string;
   logo?: string;
-  navLinks: NavLink[];
 }
+import gearIcon from "../assets/gear-icon.png";
+import gitIcon from "../assets/git-Icon.png";
+import maleuserIcon from "../assets/maleuser-icon.png";
+import messageIcon from "../assets/message-icon.png";
 
-const Header: React.FC<HeaderProps> = ({ name, logo, navLinks }) => {
+const navLinks: NavLink[] = [
+  {
+    label: "About",
+    href: "about",
+    icon: maleuserIcon,
+  },
+  {
+    label: "Projects",
+    href: "projects",
+    icon: gitIcon,
+  },
+  {
+    label: "Skills",
+    href: "skills",
+    icon: gearIcon,
+  },
+  {
+    label: "Contact",
+    href: "contact",
+    icon: messageIcon,
+  },
+];
+const Header: React.FC<HeaderProps> = ({ name, logo }) => {
   const isMobile = useMediaQuery({ query: "(max-width: 640px)" });
 
   const scrollToTop = () => {
