@@ -15,71 +15,86 @@ import {
   YOUR_NETLIFY_FUNCTION_URL,
 } from "./constants";
 import LoadingSpinner from "./components/LoadingSpinner";
-import gearIcon from "./assets/gear-icon.png";
-import gitIcon from "./assets/git-Icon.png";
-import maleuserIcon from "./assets/maleuser-icon.png";
-import messageIcon from "./assets/message-icon.png";
 
-const navLinks = [
-  {
-    label: "About",
-    href: "about",
-    icon: maleuserIcon,
-  },
-  {
-    label: "Projects",
-    href: "projects",
-    icon: gitIcon,
-  },
-  {
-    label: "Skills",
-    href: "skills",
-    icon: gearIcon,
-  },
-  {
-    label: "Contact",
-    href: "contact",
-    icon: messageIcon,
-  },
-];
 function App() {
   const [profile, setProfile] = useState<IProfile | null>(null);
   const [repos, setRepos] = useState<IRepository[] | null>(null);
   const [leetCodeSkills, setLeetCodeSkills] = useState<ILeetSkills | null>(
     null
   );
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [lastFetched, setLastFetched] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const apiCalls = [
-          axios.get(GITHUB_USER_API_URL),
-          axios.get(GITHUB_USER_API_URL + "/repos"),
-          axios.get(STATIC_DATA_RAW),
-        ];
-        if (process.env.NODE_ENV !== "development") {
-          apiCalls.push(axios.get(YOUR_NETLIFY_FUNCTION_URL));
+        // Check if data is still valid
+        if (lastFetched && Date.now() - lastFetched < 10 * 60 * 1000) {
+          setIsLoading(false);
+          return;
         }
 
-        const [
-          profileResponse,
-          reposResponse,
-          portfolioDataResponse,
-          leetCodeSkill,
-        ] = await Promise.all(apiCalls);
+        let combinedProfileData: IProfile | null = null;
+        let fetchedLeetCodeSkills: ILeetSkills | null = null;
+        let fetchedRepos: IRepository[] | null = null;
 
-        const combinedProfileData: IProfile = {
-          ...profileResponse.data,
-          portfolioData: portfolioDataResponse.data,
-        };
+        // Try to retrieve data from local storage
+        const storedProfile = localStorage.getItem("profile");
+        const storedRepos = localStorage.getItem("repos");
+        const storedLeetCodeSkills = localStorage.getItem("leetCodeSkills");
+        const storedLastFetched = localStorage.getItem("lastFetched");
 
-        if (leetCodeSkill) {
-          setLeetCodeSkills(leetCodeSkill.data);
+        if (
+          storedProfile &&
+          storedRepos &&
+          storedLeetCodeSkills &&
+          storedLastFetched &&
+          Date.now() - Number(storedLastFetched) < 10 * 60 * 1000
+        ) {
+          combinedProfileData = JSON.parse(storedProfile);
+          fetchedRepos = JSON.parse(storedRepos);
+          fetchedLeetCodeSkills = JSON.parse(storedLeetCodeSkills);
+        } else {
+          const apiCalls = [
+            axios.get(GITHUB_USER_API_URL),
+            axios.get(GITHUB_USER_API_URL + "/repos"),
+            axios.get(STATIC_DATA_RAW),
+          ];
+          if (process.env.NODE_ENV !== "development") {
+            apiCalls.push(axios.get(YOUR_NETLIFY_FUNCTION_URL));
+          }
+          const [
+            profileResponse,
+            reposResponse,
+            portfolioDataResponse,
+            leetCodeSkill,
+          ] = await Promise.all(apiCalls);
+
+          combinedProfileData = {
+            ...profileResponse.data,
+            portfolioData: portfolioDataResponse.data,
+          };
+
+          fetchedRepos = reposResponse.data;
+          fetchedLeetCodeSkills = leetCodeSkill ? leetCodeSkill.data : null;
+
+          // Store data in local storage
+          localStorage.setItem("profile", JSON.stringify(combinedProfileData));
+          localStorage.setItem("repos", JSON.stringify(fetchedRepos));
+          localStorage.setItem(
+            "leetCodeSkills",
+            JSON.stringify(fetchedLeetCodeSkills)
+          );
+          localStorage.setItem("lastFetched", String(Date.now()));
         }
 
-        setRepos(reposResponse.data);
+        if (fetchedLeetCodeSkills) {
+          setLeetCodeSkills(fetchedLeetCodeSkills);
+        }
+
+        setRepos(fetchedRepos);
         setProfile(combinedProfileData);
+        setLastFetched(Date.now());
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -95,7 +110,7 @@ function App() {
   return (
     <div className="relative w-full h-full">
       <CustomCursor />
-      <Header name={`${profile?.name}`} navLinks={navLinks} />
+      <Header name={`${profile?.name}`} />
       <GalaxyBackground />
       <div className="flex flex-col items-stretch h-full z-20 mb-32 ">
         <div className="container mx-auto px-4 flex-grow">
