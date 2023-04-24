@@ -13,7 +13,7 @@ interface HeaderProps {
   logo?: string;
 }
 import gearIcon from "../assets/gear-icon.png";
-import gitIcon from "../assets/git-Icon.png";
+import gitIcon from "../assets/git-icon.png";
 import maleuserIcon from "../assets/maleuser-icon.png";
 import messageIcon from "../assets/message-icon.png";
 
