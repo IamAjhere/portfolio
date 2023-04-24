@@ -105,25 +105,21 @@ function Contact() {
               className="space-y-4"
               data-netlify="true"
               method="POST"
-              onSubmit={handleSubmit}
             >
               <input type="hidden" name="form-name" value="contact" />
               <div>
                 <label
-                  className="block text-white font-bold mb-2 transition-all duration-300 "
+                  className="block text-white font-bold mb-2 transition-all duration-300"
                   htmlFor="name"
                 >
                   Name
                 </label>
                 <input
-                  className={`w-full bg-black border-2 p-2 rounded-md custom-shadow-focus text-white focus:outline-none  transition-border duration-500 ${
-                    isNameInvalid ? "border-red-500" : "border-white "
-                  }`}
+                  className="w-full bg-black border-2 p-2 rounded-md custom-shadow-focus text-white focus:outline-none border-white transition-border duration-500"
                   type="text"
                   id="name"
                   name="name"
                   maxLength={50}
-                  {...nameField}
                   required
                 />
               </div>
@@ -135,13 +131,10 @@ function Contact() {
                   Email
                 </label>
                 <input
-                  className={`w-full bg-black border-2 p-2 rounded-md custom-shadow-focus text-white focus:outline-none transition-border duration-500 ${
-                    emailValid ? "border-white" : "border-red-500"
-                  }`}
+                  className="w-full bg-black border-2 p-2 rounded-md custom-shadow-focus text-white focus:outline-none border-white transition-border duration-500"
                   type="email"
                   id="email"
                   name="email"
-                  {...emailField}
                   required
                 />
               </div>
@@ -153,13 +146,10 @@ function Contact() {
                   Message
                 </label>
                 <textarea
-                  className={`w-full bg-black border-2 p-2 rounded-md custom-shadow-focus text-white focus:outline-none transition-border duration-500 resize-none ${
-                    isMessageInvalid ? "border-red-500" : "border-white"
-                  }`}
+                  className="w-full bg-black border-2 p-2 rounded-md custom-shadow-focus text-white focus:outline-none border-white transition-border duration-500 resize-none"
                   id="message"
                   name="message"
                   maxLength={500}
-                  {...messageField}
                   required
                 ></textarea>
               </div>
