@@ -21,7 +21,13 @@ const Header: React.FC<HeaderProps> = ({ name, logo, navLinks }) => {
     animateScroll.scrollToTop({ duration: 1000 });
   };
   return (
-    <header className="text-white py-4 px-2 sm:px-6 fixed bottom-0 left-0 w-full z-10 backdrop-blur-lg border-t-2 border-b-0 border-gray-300 sm:border-t-0 sm:border-b-2 sm:top-0 sm:bottom-auto">
+    <header
+      className="text-white py-4 px-2 sm:px-6 fixed bottom-0 left-0 w-full z-10 border-t-2 border-b-0 border-gray-300 sm:border-t-0 sm:border-b-2 sm:top-0 sm:bottom-auto"
+      style={{
+        background: "rgba(0, 0, 0, 0.5)",
+        backdropFilter: "blur(5px)",
+      }}
+    >
       <div className="container mx-auto flex justify-between items-center">
         <div
           onClick={scrollToTop}
