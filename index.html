@@ -12,6 +12,17 @@
   </head>
   <body>
     <div id="root"></div>
+    <form name="contact" data-netlify="true" hidden>
+      <div>
+        <input type="text" id="name" name="name" required />
+      </div>
+      <div>
+        <input type="email" id="email" name="email" required />
+      </div>
+      <div>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+    </form>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

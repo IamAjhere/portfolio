@@ -115,7 +115,6 @@ function Contact() {
               className="space-y-4"
               data-netlify="true"
               method="POST"
-              action="/contact"
             >
               <input type="hidden" name="form-name" value="contact" />
               <div>
