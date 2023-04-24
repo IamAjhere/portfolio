@@ -3,6 +3,7 @@ import githubIcon from "../../assets/github icon.png";
 import linkedinIcon from "../../assets/linkedin-icon.png";
 import leetcodeIcon from "../../assets/leetcode-icon.png";
 import instagramIcon from "../../assets/instagram-icon.png";
+import Toast, { ToastProps } from "../Custom Toast/Toast";
 
 const EMAIL_PATTERN = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -52,25 +53,6 @@ const SocialLink: React.FC<{
     <span>{text}</span>
   </a>
 );
-const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
-  event.preventDefault();
-
-  const myForm = event.currentTarget;
-  const formData = new FormData(myForm);
-  const searchParams = new URLSearchParams();
-
-  for (const [key, value] of formData) {
-    searchParams.append(key, value as string);
-  }
-
-  fetch("/", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: searchParams.toString(),
-  })
-    .then(() => alert("Thank you for your submission"))
-    .catch((error) => alert(error));
-};
 
 function Contact() {
   const nameField = useFormField();
@@ -82,6 +64,61 @@ function Contact() {
   const isNameInvalid = nameField.touched && nameField.value.trim() === "";
   const isMessageInvalid =
     messageField.touched && messageField.value.trim() === "";
+  //
+  const [toast, setToast] = useState<ToastProps>({
+    show: true,
+    message: "",
+    type: "",
+  });
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
+
+    const myForm = event.currentTarget;
+    const formData = new FormData(myForm);
+    const searchParams = new URLSearchParams();
+
+    for (const [key, value] of formData) {
+      searchParams.append(key, value as string);
+    }
+    setToast({
+      show: true,
+      message: "Form Submission Loading.",
+      type: "loading",
+    });
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: searchParams.toString(),
+    })
+      .then((response) => {
+        if (response.ok) {
+          setToast({
+            show: true,
+            message: "Thank you for your submission!",
+            type: "success",
+          });
+        } else {
+          setToast({
+            show: true,
+            message: "Error sending message.",
+            type: "error",
+          });
+        }
+      })
+      .catch((error) => {
+        setToast({
+          show: true,
+          message: "Error sending message.",
+          type: "error",
+        });
+      });
+
+    setTimeout(() => {
+      setToast({ show: false, message: "", type: "" });
+    }, 3000);
+  };
+
   return (
     <div className="w-full h-full flex items-center justify-center mb-16">
       <div
@@ -174,6 +211,11 @@ function Contact() {
                 </button>
               </div>
             </form>
+            <Toast
+              show={toast.show}
+              message={toast.message}
+              type={toast.type}
+            />
           </div>
           <div className="flex flex-col items-center mt-8 md:mt-0">
             <h2 className="text-2xl font-bold text-white mb-4">

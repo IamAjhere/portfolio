@@ -54,7 +54,6 @@ function App() {
           axios.get(GITHUB_USER_API_URL + "/repos"),
           axios.get(STATIC_DATA_RAW),
         ];
-        console.log(process.env.NODE_ENV);
         if (process.env.NODE_ENV !== "development") {
           apiCalls.push(axios.get(YOUR_NETLIFY_FUNCTION_URL));
         }
