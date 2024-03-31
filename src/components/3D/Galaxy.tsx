@@ -1,13 +1,13 @@
-import React, { useMemo, useEffect } from "react";
-import { useThree, useFrame } from "@react-three/fiber";
-import { OrbitControls, PerspectiveCamera, Stars } from "@react-three/drei";
-import * as THREE from "three";
+import React, { useMemo, useEffect } from 'react';
+import { useThree, useFrame } from '@react-three/fiber';
+import { OrbitControls, PerspectiveCamera, Stars } from '@react-three/drei';
+import * as THREE from 'three';
 
 const Galaxy = () => {
   const { scene, camera, size } = useThree();
 
   useEffect(() => {
-    scene.fog = new THREE.Fog("black", 10, 50);
+    scene.fog = new THREE.Fog('black', 10, 50);
   }, [scene]);
 
   useFrame(() => {
@@ -24,7 +24,7 @@ const Galaxy = () => {
     for (let i = 0; i < count * 4; i++) {
       positions[i] = (Math.random() - 0.5) * 100;
     }
-    geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     return geometry;
   }, []);
 

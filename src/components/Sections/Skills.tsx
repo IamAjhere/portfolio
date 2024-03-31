@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { ILeetSkills, IProfile, ISkill } from "../../Types/GitTypes";
+import React, { useState } from 'react';
+import { ILeetSkills, IProfile, ISkill } from '../../Types/GitTypes';
 
 interface StaticSkillCategoryProps {
   categoryTitle: string;
@@ -27,37 +27,37 @@ const StaticSkillCategory: React.FC<StaticSkillCategoryProps> = ({
   handleToggleSkills,
 }) => {
   return (
-    <div className="mt-4">
+    <div className='mt-4'>
       <div
-        className="flex items-center text-sm font-medium mb-2 nav-link select-none"
+        className='flex items-center text-sm font-medium mb-2 nav-link select-none'
         onClick={() => handleToggleSkills(categoryTitle)}
       >
         <span
           className={`transform inline-block mr-2 ${
-            isOpen ? "rotate-90" : "rotate-0"
+            isOpen ? 'rotate-90' : 'rotate-0'
           } transition-all duration-200`}
         >
           ▶
         </span>
         <span>
           {categoryTitle
-            .split("_")
+            .split('_')
             .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(" ")}
+            .join(' ')}
         </span>
       </div>
       <div
         className={`flex flex-wrap overflow-y-auto ${
-          isOpen ? "max-h-2rows" : "max-h-0"
+          isOpen ? 'max-h-2rows' : 'max-h-0'
         }`}
       >
         {skills.map((skill) => (
           <div
             key={skill}
-            className="flex items-center text-xs my-2 mr-2 select-none"
+            className='flex items-center text-xs my-2 mr-2 select-none'
           >
-            <span className="inline-block">
-              <span className="inline-flex items-center px-2 py-1 whitespace-nowrap leading-6 rounded-full text-white bg-black border custom-shadow-2px transition-all duration-200 ">
+            <span className='inline-block'>
+              <span className='inline-flex items-center px-2 py-1 whitespace-nowrap leading-6 rounded-full text-white bg-black border custom-shadow-2px transition-all duration-200 '>
                 {skill}
               </span>
             </span>
@@ -75,14 +75,14 @@ const SkillCategory: React.FC<SkillCategoryProps> = ({
   handleToggleSkills,
 }) => {
   return (
-    <div className="mt-4">
+    <div className='mt-4'>
       <div
-        className="flex items-center text-sm font-medium mb-2 nav-link select-none "
+        className='flex items-center text-sm font-medium mb-2 nav-link select-none '
         onClick={() => handleToggleSkills(categoryTitle)}
       >
         <span
           className={`transform inline-block mr-2 ${
-            isOpen ? "rotate-90" : "rotate-0"
+            isOpen ? 'rotate-90' : 'rotate-0'
           } transition-all duration-200`}
         >
           ▶
@@ -91,20 +91,20 @@ const SkillCategory: React.FC<SkillCategoryProps> = ({
       </div>
       <div
         className={`flex flex-wrap overflow-y-auto ${
-          isOpen ? "max-h-2rows" : "max-h-0"
+          isOpen ? 'max-h-2rows' : 'max-h-0'
         }`}
       >
         {skills?.map((skill) => (
           <div
             key={skill.tagName}
-            className="flex items-center text-xs my-2 mr-2 select-none"
+            className='flex items-center text-xs my-2 mr-2 select-none'
           >
-            <span className="inline-block">
-              <span className="inline-flex items-center px-2 py-1 whitespace-nowrap leading-6 rounded-full text-white bg-black border custom-shadow-2px transition-all duration-200 ">
+            <span className='inline-block'>
+              <span className='inline-flex items-center px-2 py-1 whitespace-nowrap leading-6 rounded-full text-white bg-black border custom-shadow-2px transition-all duration-200 '>
                 {skill.tagName}
               </span>
             </span>
-            <span className="text-xs text-gray-400 ml-2">{`x${skill.problemsSolved}`}</span>
+            <span className='text-xs text-gray-400 ml-2'>{`x${skill.problemsSolved}`}</span>
           </div>
         ))}
       </div>
@@ -113,57 +113,57 @@ const SkillCategory: React.FC<SkillCategoryProps> = ({
 };
 
 const Skills: React.FC<SkillsProps> = ({ profile, leetSkills }) => {
-  const [openCategory, setOpenCategory] = useState("");
+  const [openCategory, setOpenCategory] = useState('');
 
   const handleToggleSkills = (categoryTitle: string) => {
     if (openCategory === categoryTitle) {
-      setOpenCategory("");
+      setOpenCategory('');
     } else {
       setOpenCategory(categoryTitle);
     }
   };
 
   return (
-    <div className="min-h-screen flex-grow sm:pt-10">
-      <div className="w-full h-full flex flex-col items-center justify-center p-4">
-        <h1 className="text-4xl sm:mt-1 sm:text-6xl font-bold text-center text-white mb-4">
-          {"Skills".split("").map((letter, index) => (
-            <span key={`hello-${index}`} className="letter-stroke">
+    <div className='min-h-screen flex-grow sm:pt-10'>
+      <div className='w-full h-full flex flex-col items-center justify-center p-4'>
+        <h1 className='text-4xl sm:mt-1 sm:text-6xl font-bold text-center text-white mb-4'>
+          {'Skills'.split('').map((letter, index) => (
+            <span key={`hello-${index}`} className='letter-stroke'>
               {letter}
             </span>
           ))}
         </h1>
-        <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 gap-10 mb-8">
-          <div className="bg-black rounded-lg p-6 border border-white shadow-lg flex flex-col custom-shadow">
-            <h2 className="text-2xl font-bold sm:mb-4 text-center  text-white ">
+        <div className='w-full h-full grid grid-cols-1 md:grid-cols-2 gap-10 mb-8'>
+          <div className='bg-black rounded-lg p-6 border border-white shadow-lg flex flex-col custom-shadow'>
+            <h2 className='text-2xl font-bold sm:mb-4 text-center  text-white '>
               Leet Coding Skills
             </h2>
-            <div className="sm:mt-8 w-full max-w-3xl mx-auto flex-grow  text-white">
+            <div className='sm:mt-8 w-full max-w-3xl mx-auto flex-grow  text-white'>
               <SkillCategory
-                categoryTitle="Advanced"
+                categoryTitle='Advanced'
                 skills={leetSkills?.advanced}
-                isOpen={openCategory === "Advanced"}
+                isOpen={openCategory === 'Advanced'}
                 handleToggleSkills={handleToggleSkills}
               />
               <SkillCategory
-                categoryTitle="Intermediate"
+                categoryTitle='Intermediate'
                 skills={leetSkills?.intermediate}
-                isOpen={openCategory === "Intermediate"}
+                isOpen={openCategory === 'Intermediate'}
                 handleToggleSkills={handleToggleSkills}
               />
               <SkillCategory
-                categoryTitle="Fundamental"
+                categoryTitle='Fundamental'
                 skills={leetSkills?.fundamental}
-                isOpen={openCategory === "Fundamental"}
+                isOpen={openCategory === 'Fundamental'}
                 handleToggleSkills={handleToggleSkills}
               />
             </div>
           </div>
-          <div className="bg-black rounded-lg p-6 border border-white shadow-lg flex flex-col custom-shadow">
-            <h2 className="text-2xl font-bold mb-4 text-center text-white">
+          <div className='bg-black rounded-lg p-6 border border-white shadow-lg flex flex-col custom-shadow'>
+            <h2 className='text-2xl font-bold mb-4 text-center text-white'>
               Overall Skills
             </h2>
-            <div className="sm:mt-8 w-full max-w-3xl mx-auto flex-grow text-white">
+            <div className='sm:mt-8 w-full max-w-3xl mx-auto flex-grow text-white'>
               {profile &&
                 Object.entries(profile.portfolioData.skills).map(
                   ([categoryTitle, skills]) => (

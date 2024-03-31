@@ -1,5 +1,5 @@
-import { useEffect, useRef } from "react";
-import "./cursor.css";
+import { useEffect, useRef } from 'react';
+import './cursor.css';
 
 function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement | null>(null);
@@ -15,28 +15,28 @@ function CustomCursor() {
 
     const onMouseEnter = () => {
       if (cursorRef.current) {
-        cursorRef.current.classList.add("cursor-hover");
+        cursorRef.current.classList.add('cursor-hover');
       }
     };
 
     const onMouseLeave = () => {
       if (cursorRef.current) {
-        cursorRef.current.classList.remove("cursor-hover");
+        cursorRef.current.classList.remove('cursor-hover');
       }
     };
 
     const attachListenersToButtons = () => {
-      const buttons = document.querySelectorAll(".nav-link, button");
+      const buttons = document.querySelectorAll('.nav-link, button');
 
       buttons.forEach((button) => {
-        button.addEventListener("mouseenter", onMouseEnter);
-        button.addEventListener("mouseleave", onMouseLeave);
+        button.addEventListener('mouseenter', onMouseEnter);
+        button.addEventListener('mouseleave', onMouseLeave);
       });
     };
 
     const observer = new MutationObserver((mutationsList) => {
       for (const mutation of mutationsList) {
-        if (mutation.type === "childList") {
+        if (mutation.type === 'childList') {
           attachListenersToButtons();
         }
       }
@@ -44,20 +44,20 @@ function CustomCursor() {
 
     observer.observe(document.body, { childList: true, subtree: true });
 
-    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener('mousemove', onMouseMove);
 
     return () => {
-      const buttons = document.querySelectorAll(".nav-link, button");
+      const buttons = document.querySelectorAll('.nav-link, button');
       buttons.forEach((button) => {
-        button.removeEventListener("mouseenter", onMouseEnter);
-        button.removeEventListener("mouseleave", onMouseLeave);
+        button.removeEventListener('mouseenter', onMouseEnter);
+        button.removeEventListener('mouseleave', onMouseLeave);
       });
-      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener('mousemove', onMouseMove);
       observer.disconnect();
     };
   }, []);
 
-  return <div className="cursor hidden sm:flex" ref={cursorRef} />;
+  return <div className='cursor hidden sm:flex' ref={cursorRef} />;
 }
 
 export default CustomCursor;

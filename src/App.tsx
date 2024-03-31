@@ -1,20 +1,20 @@
-import { useEffect, useState } from "react";
-import "./App.css";
-import CustomCursor from "./components/Cursor/CustomCursor";
-import GalaxyBackground from "./components/GalaxyBackground";
-import Header from "./components/header";
-import About from "./components/Sections/About";
-import Contact from "./components/Sections/Contact";
-import Projects from "./components/Sections/Projects";
-import Skills from "./components/Sections/Skills";
-import axios from "axios";
-import { IProfile, IRepository, ILeetSkills } from "./Types/GitTypes";
+import { useEffect, useState } from 'react';
+import './App.css';
+import CustomCursor from './components/Cursor/CustomCursor';
+import GalaxyBackground from './components/GalaxyBackground';
+import Header from './components/header';
+import About from './components/Sections/About';
+import Contact from './components/Sections/Contact';
+import Projects from './components/Sections/Projects';
+import Skills from './components/Sections/Skills';
+import axios from 'axios';
+import { IProfile, IRepository, ILeetSkills } from './Types/GitTypes';
 import {
   GITHUB_USER_API_URL,
   STATIC_DATA_RAW,
   YOUR_NETLIFY_FUNCTION_URL,
-} from "./constants";
-import LoadingSpinner from "./components/LoadingSpinner";
+} from './constants';
+import LoadingSpinner from './components/LoadingSpinner';
 
 function App() {
   const [profile, setProfile] = useState<IProfile | null>(null);
@@ -39,10 +39,10 @@ function App() {
         let fetchedRepos: IRepository[] | null = null;
 
         // Try to retrieve data from local storage
-        const storedProfile = localStorage.getItem("profile");
-        const storedRepos = localStorage.getItem("repos");
-        const storedLeetCodeSkills = localStorage.getItem("leetCodeSkills");
-        const storedLastFetched = localStorage.getItem("lastFetched");
+        const storedProfile = localStorage.getItem('profile');
+        const storedRepos = localStorage.getItem('repos');
+        const storedLeetCodeSkills = localStorage.getItem('leetCodeSkills');
+        const storedLastFetched = localStorage.getItem('lastFetched');
 
         if (
           storedProfile &&
@@ -57,10 +57,10 @@ function App() {
         } else {
           const apiCalls = [
             axios.get(GITHUB_USER_API_URL),
-            axios.get(GITHUB_USER_API_URL + "/repos"),
+            axios.get(GITHUB_USER_API_URL + '/repos'),
             axios.get(STATIC_DATA_RAW),
           ];
-          if (process.env.NODE_ENV !== "development") {
+          if (process.env.NODE_ENV !== 'development') {
             apiCalls.push(axios.get(YOUR_NETLIFY_FUNCTION_URL));
           }
           const [
@@ -79,13 +79,13 @@ function App() {
           fetchedLeetCodeSkills = leetCodeSkill ? leetCodeSkill.data : null;
 
           // Store data in local storage
-          localStorage.setItem("profile", JSON.stringify(combinedProfileData));
-          localStorage.setItem("repos", JSON.stringify(fetchedRepos));
+          localStorage.setItem('profile', JSON.stringify(combinedProfileData));
+          localStorage.setItem('repos', JSON.stringify(fetchedRepos));
           localStorage.setItem(
-            "leetCodeSkills",
+            'leetCodeSkills',
             JSON.stringify(fetchedLeetCodeSkills)
           );
-          localStorage.setItem("lastFetched", String(Date.now()));
+          localStorage.setItem('lastFetched', String(Date.now()));
         }
 
         if (fetchedLeetCodeSkills) {
@@ -97,7 +97,7 @@ function App() {
         setLastFetched(Date.now());
         setIsLoading(false);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error('Error fetching data:', error);
       }
     };
 
@@ -108,22 +108,22 @@ function App() {
     return <LoadingSpinner />;
   }
   return (
-    <div className="relative w-full h-full">
+    <div className='relative w-full h-full'>
       <CustomCursor />
       <Header name={`${profile?.name}`} />
       <GalaxyBackground />
-      <div className="flex flex-col items-stretch h-full z-20 mb-32 ">
-        <div className="container mx-auto px-4 flex-grow">
-          <div id="about" className="min-h-screen md:h-screen  ">
+      <div className='flex flex-col items-stretch h-full z-20 mb-32 '>
+        <div className='container mx-auto px-4 flex-grow'>
+          <div id='about' className='min-h-screen md:h-screen  '>
             <About profile={profile} />
           </div>
-          <div id="projects" className="min-h-screen md:h-screen ">
+          <div id='projects' className='min-h-screen md:h-screen '>
             <Projects repos={repos} login={profile?.login} />
           </div>
-          <div id="skills" className="min-h-screen md:h-screen  ">
+          <div id='skills' className='min-h-screen md:h-screen  '>
             <Skills profile={profile} leetSkills={leetCodeSkills} />
           </div>
-          <div id="contact" className="min-h-screen md:h-screen  ">
+          <div id='contact' className='min-h-screen md:h-screen  '>
             <Contact />
           </div>
         </div>
