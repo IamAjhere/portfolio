@@ -1,11 +1,10 @@
-import React from 'react';
 import { IProfile } from '../../Types/GitTypes';
 
 interface AboutProps {
   profile: IProfile | null;
 }
 
-const About: React.FC<AboutProps> = ({ profile }) => {
+function About({ profile }: AboutProps) {
   if (!profile) {
     return null;
   }
@@ -55,6 +54,6 @@ const About: React.FC<AboutProps> = ({ profile }) => {
       </div>
     </div>
   );
-};
+}
 
 export default About;

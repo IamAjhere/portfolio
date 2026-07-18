@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import githubIcon from '../../assets/github icon.png';
 import linkedinIcon from '../../assets/linkedin-icon.png';
 import leetcodeIcon from '../../assets/leetcode-icon.png';
@@ -12,7 +12,7 @@ function useFormField(initialValue = '') {
   const [touched, setTouched] = useState(false);
 
   const onChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setValue(e.target.value);
   };
@@ -33,12 +33,15 @@ function useFormField(initialValue = '') {
   return { value, touched, onChange, onBlur, onFocus, reset };
 }
 
-const SocialLink: React.FC<{
+interface SocialLinkProps {
   href: string;
   icon: string;
   alt: string;
   text: string;
-}> = ({ href, icon, alt, text }) => (
+}
+
+function SocialLink({ href, icon, alt, text }: SocialLinkProps) {
+  return (
   <a
     href={href}
     target='_blank'
@@ -57,7 +60,8 @@ const SocialLink: React.FC<{
     />
     <span>{text}</span>
   </a>
-);
+  );
+}
 
 function Contact() {
   const nameField = useFormField();
@@ -113,7 +117,8 @@ function Contact() {
           });
         }
       })
-      .catch((error) => {
+      .catch((error: unknown) => {
+        console.error('Error submitting contact form:', error);
         setToast({
           show: true,
           message: 'Error sending message.',

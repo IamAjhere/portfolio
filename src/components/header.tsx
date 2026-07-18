@@ -1,4 +1,3 @@
-import React from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { Link, animateScroll } from 'react-scroll';
 
@@ -39,7 +38,7 @@ const navLinks: NavLink[] = [
     icon: messageIcon,
   },
 ];
-const Header: React.FC<HeaderProps> = ({ name, logo }) => {
+function Header({ name, logo }: HeaderProps) {
   const isMobile = useMediaQuery({ query: '(max-width: 640px)' });
 
   const scrollToTop = () => {
@@ -95,6 +94,6 @@ const Header: React.FC<HeaderProps> = ({ name, logo }) => {
       </div>
     </header>
   );
-};
+}
 
 export default Header;

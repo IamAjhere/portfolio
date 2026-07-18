@@ -5,6 +5,8 @@ function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    const INTERACTIVE_SELECTOR = '.nav-link, button';
+
     const onMouseMove = (event: MouseEvent) => {
       if (cursorRef.current) {
         cursorRef.current.style.transform = `translate3d(${
@@ -13,47 +15,28 @@ function CustomCursor() {
       }
     };
 
-    const onMouseEnter = () => {
-      if (cursorRef.current) {
+    const onMouseOver = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (cursorRef.current && target.closest(INTERACTIVE_SELECTOR)) {
         cursorRef.current.classList.add('cursor-hover');
       }
     };
 
-    const onMouseLeave = () => {
-      if (cursorRef.current) {
+    const onMouseOut = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (cursorRef.current && target.closest(INTERACTIVE_SELECTOR)) {
         cursorRef.current.classList.remove('cursor-hover');
       }
     };
 
-    const attachListenersToButtons = () => {
-      const buttons = document.querySelectorAll('.nav-link, button');
-
-      buttons.forEach((button) => {
-        button.addEventListener('mouseenter', onMouseEnter);
-        button.addEventListener('mouseleave', onMouseLeave);
-      });
-    };
-
-    const observer = new MutationObserver((mutationsList) => {
-      for (const mutation of mutationsList) {
-        if (mutation.type === 'childList') {
-          attachListenersToButtons();
-        }
-      }
-    });
-
-    observer.observe(document.body, { childList: true, subtree: true });
-
     document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseover', onMouseOver);
+    document.addEventListener('mouseout', onMouseOut);
 
     return () => {
-      const buttons = document.querySelectorAll('.nav-link, button');
-      buttons.forEach((button) => {
-        button.removeEventListener('mouseenter', onMouseEnter);
-        button.removeEventListener('mouseleave', onMouseLeave);
-      });
       document.removeEventListener('mousemove', onMouseMove);
-      observer.disconnect();
+      document.removeEventListener('mouseover', onMouseOver);
+      document.removeEventListener('mouseout', onMouseOut);
     };
   }, []);
 

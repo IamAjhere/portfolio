@@ -24,6 +24,7 @@ function App() {
   );
   const [lastFetched, setLastFetched] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -96,8 +97,12 @@ function App() {
         setProfile(combinedProfileData);
         setLastFetched(Date.now());
         setIsLoading(false);
-      } catch (error) {
+      } catch (error: unknown) {
         console.error('Error fetching data:', error);
+        setLoadError(
+          'Failed to load portfolio data. Please refresh the page.'
+        );
+        setIsLoading(false);
       }
     };
 
@@ -107,6 +112,15 @@ function App() {
   if (isLoading) {
     return <LoadingSpinner />;
   }
+
+  if (loadError) {
+    return (
+      <div className='w-full h-full fixed top-0 left-0 bg-black flex items-center justify-center text-white text-center px-4'>
+        {loadError}
+      </div>
+    );
+  }
+
   return (
     <div className='relative w-full h-full'>
       <CustomCursor />

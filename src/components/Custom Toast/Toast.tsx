@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import './Toast.css';
 
 export interface ToastProps {
@@ -7,8 +7,9 @@ export interface ToastProps {
   type: 'success' | 'error' | 'loading' | '';
 }
 
-const Toast: React.FC<ToastProps> = ({ show, message, type }) => {
-  let backgroundColor, icon;
+function Toast({ show, message, type }: ToastProps) {
+  let backgroundColor: string;
+  let icon: ReactElement | null;
 
   switch (type) {
     case 'success':
@@ -34,6 +35,6 @@ const Toast: React.FC<ToastProps> = ({ show, message, type }) => {
       {message}
     </div>
   );
-};
+}
 
 export default Toast;

@@ -1,5 +1,4 @@
 // Components/Sections/Projects.tsx
-import React from 'react';
 import { IProfile, IRepository } from '../../Types/GitTypes';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
@@ -19,7 +18,8 @@ interface RepoCardProps {
   formatRepoName: (name: string) => string;
 }
 
-const RepoCard: React.FC<RepoCardProps> = ({ repo, formatRepoName }) => (
+function RepoCard({ repo, formatRepoName }: RepoCardProps) {
+  return (
   <div
     className='m-4 w-80 h-96 sm:w-80 sm:h-72 p-4 rounded-lg shadow custom-shadow flex flex-col'
     style={{
@@ -37,7 +37,9 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, formatRepoName }) => (
     </div>
     <div className='mt-4 mb-2 flex items-center'>
       <button
-        onClick={() => window.open(repo.html_url, '_blank')}
+        onClick={() =>
+          window.open(repo.html_url, '_blank', 'noopener,noreferrer')
+        }
         className='text-xs custom-shadow-hover cursor-none sm:text-sm text-white bg-transparent border border-white rounded px-2 py-1 mr-2 transition duration-300 ease-in-out transform hover:scale-105'
         style={{
           display: 'flex',
@@ -69,7 +71,9 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, formatRepoName }) => (
 
       {repo.homepage && (
         <button
-          onClick={() => window.open(repo.homepage, '_blank')}
+          onClick={() =>
+            window.open(repo.homepage, '_blank', 'noopener,noreferrer')
+          }
           className='text-xs cursor-none sm:text-sm text-black bg-white border border-white rounded px-2 py-1 mr-2 transition duration-300 ease-in-out transform hover:scale-105'
           style={{
             display: 'flex',
@@ -117,7 +121,8 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, formatRepoName }) => (
       </div>
     </div>
   </div>
-);
+  );
+}
 
 function formatRepoName(name: string) {
   return name
@@ -125,17 +130,17 @@ function formatRepoName(name: string) {
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
 }
-const chunk = (array: any[], size: number) => {
-  const chunkedArr = [];
+function chunk<T>(array: T[], size: number): T[][] {
+  const chunkedArr: T[][] = [];
   let index = 0;
   while (index < array.length) {
     chunkedArr.push(array.slice(index, size + index));
     index += size;
   }
   return chunkedArr;
-};
+}
 
-const Projects: React.FC<ProjectsProps> = ({ repos, login }) => {
+function Projects({ repos, login }: ProjectsProps) {
   const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
 
   const repoCards = repos
@@ -176,6 +181,6 @@ const Projects: React.FC<ProjectsProps> = ({ repos, login }) => {
       </div>
     </div>
   );
-};
+}
 
 export default Projects;

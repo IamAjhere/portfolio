@@ -29,57 +29,65 @@ let cache = {
   timestamp: null,
   data: null,
 };
-const handler = async (event, context) => {
-  if (event.httpMethod === "GET") {
-    const currentTime = new Date().getTime();
 
-    // Check if the cache is still valid
-    if (cache.timestamp && currentTime - cache.timestamp <= CACHE_DURATION_MS) {
-      console.log("Fetching From Cache");
-      return {
-        statusCode: 200,
-        body: JSON.stringify(cache.data),
-      };
-    }
-    try {
-      console.log("Fetching From LeetCode.");
-      const response = await axios.post(LEETCODE_SKILLS_GRAPHQL, {
-        query: LEETCODE_SKILLS_QUERY,
-        variables: { username: LEETCODE_USERNAME },
-      });
+const JSON_HEADERS = { "Content-Type": "application/json" };
 
-      if (
-        response.data &&
-        response.data.data &&
-        response.data.data.matchedUser &&
-        response.data.data.matchedUser.tagProblemCounts
-      ) {
-        const skills = response.data.data.matchedUser.tagProblemCounts;
-        cache = {
-          timestamp: currentTime,
-          data: skills,
-        };
-        return {
-          statusCode: 200,
-          body: JSON.stringify(skills),
-        };
-      } else {
-        return {
-          statusCode: 404,
-          body: JSON.stringify({ error: "Skills data not found" }),
-        };
-      }
-    } catch (error) {
-      console.error("Error fetching LeetCode skill data:", error);
-      return {
-        statusCode: 500,
-        body: JSON.stringify({ error: "Error fetching LeetCode skill data" }),
-      };
-    }
-  } else {
+/**
+ * @param {{ httpMethod: string }} event
+ */
+const handler = async (event) => {
+  if (event.httpMethod !== "GET") {
     return {
       statusCode: 405,
+      headers: JSON_HEADERS,
       body: JSON.stringify({ error: "Method not allowed. Use GET request." }),
+    };
+  }
+
+  const currentTime = new Date().getTime();
+
+  // Check if the cache is still valid
+  if (cache.timestamp && currentTime - cache.timestamp <= CACHE_DURATION_MS) {
+    console.log("Fetching From Cache");
+    return {
+      statusCode: 200,
+      headers: JSON_HEADERS,
+      body: JSON.stringify(cache.data),
+    };
+  }
+
+  try {
+    console.log("Fetching From LeetCode.");
+    const response = await axios.post(LEETCODE_SKILLS_GRAPHQL, {
+      query: LEETCODE_SKILLS_QUERY,
+      variables: { username: LEETCODE_USERNAME },
+    });
+
+    const skills = response.data?.data?.matchedUser?.tagProblemCounts;
+
+    if (!skills) {
+      return {
+        statusCode: 404,
+        headers: JSON_HEADERS,
+        body: JSON.stringify({ error: "Skills data not found" }),
+      };
+    }
+
+    cache = {
+      timestamp: currentTime,
+      data: skills,
+    };
+    return {
+      statusCode: 200,
+      headers: JSON_HEADERS,
+      body: JSON.stringify(skills),
+    };
+  } catch (error) {
+    console.error("Error fetching LeetCode skill data:", error);
+    return {
+      statusCode: 500,
+      headers: JSON_HEADERS,
+      body: JSON.stringify({ error: "Error fetching LeetCode skill data" }),
     };
   }
 };

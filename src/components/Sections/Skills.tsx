@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ILeetSkills, IProfile, ISkill } from '../../Types/GitTypes';
 
 interface StaticSkillCategoryProps {
@@ -20,12 +20,12 @@ interface SkillsProps {
   leetSkills: ILeetSkills | null;
 }
 
-const StaticSkillCategory: React.FC<StaticSkillCategoryProps> = ({
+function StaticSkillCategory({
   categoryTitle,
   skills,
   isOpen,
   handleToggleSkills,
-}) => {
+}: StaticSkillCategoryProps) {
   return (
     <div className='mt-4'>
       <div
@@ -48,7 +48,7 @@ const StaticSkillCategory: React.FC<StaticSkillCategoryProps> = ({
       </div>
       <div
         className={`flex flex-wrap overflow-y-auto ${
-          isOpen ? 'max-h-2rows' : 'max-h-0'
+          isOpen ? 'max-h-40' : 'max-h-0'
         }`}
       >
         {skills.map((skill) => (
@@ -66,14 +66,14 @@ const StaticSkillCategory: React.FC<StaticSkillCategoryProps> = ({
       </div>
     </div>
   );
-};
+}
 
-const SkillCategory: React.FC<SkillCategoryProps> = ({
+function SkillCategory({
   categoryTitle,
   skills,
   isOpen,
   handleToggleSkills,
-}) => {
+}: SkillCategoryProps) {
   return (
     <div className='mt-4'>
       <div
@@ -91,7 +91,7 @@ const SkillCategory: React.FC<SkillCategoryProps> = ({
       </div>
       <div
         className={`flex flex-wrap overflow-y-auto ${
-          isOpen ? 'max-h-2rows' : 'max-h-0'
+          isOpen ? 'max-h-40' : 'max-h-0'
         }`}
       >
         {skills?.map((skill) => (
@@ -110,9 +110,9 @@ const SkillCategory: React.FC<SkillCategoryProps> = ({
       </div>
     </div>
   );
-};
+}
 
-const Skills: React.FC<SkillsProps> = ({ profile, leetSkills }) => {
+function Skills({ profile, leetSkills }: SkillsProps) {
   const [openCategory, setOpenCategory] = useState('');
 
   const handleToggleSkills = (categoryTitle: string) => {
@@ -182,6 +182,6 @@ const Skills: React.FC<SkillsProps> = ({ profile, leetSkills }) => {
       </div>
     </div>
   );
-};
+}
 
 export default Skills;

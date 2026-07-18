@@ -1,5 +1,5 @@
 // src/components/GalaxyBackground.tsx
-import React, { Suspense } from 'react';
+import { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import Galaxy from './3D/Galaxy';
 
