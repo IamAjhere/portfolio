@@ -1,0 +1,51 @@
+{
+  "skillDepth": {
+    "tiers": [
+      {
+        "name": "Expert",
+        "cards": [
+          {
+            "title": "Backend & API Engineering",
+            "subtitle": "NestJS microservices · GraphQL · production payroll systems at scale",
+            "pills": ["NestJS", "Node.js", "TypeScript", "GraphQL / Apollo", "MongoDB", "PostgreSQL / Prisma", "Redis", "Elasticsearch"],
+            "highlights": "15+ production microservices · payroll processing pipelines · RBAC & inter-service auth"
+          }
+        ]
+      },
+      {
+        "name": "Advanced",
+        "cards": [
+          {
+            "title": "Frontend",
+            "subtitle": "SPAs & SSR apps",
+            "pills": ["React", "Next.js", "Tailwind", "Three.js"]
+          },
+          {
+            "title": "AI / Agent Engineering",
+            "subtitle": "agentic tooling & workflows",
+            "growing": true,
+            "pills": ["Claude Code", "MCP servers", "Agent workflows"]
+          },
+          {
+            "title": "DevOps & Cloud",
+            "subtitle": "ship & run",
+            "pills": ["AWS", "Docker", "Serverless", "CI/CD"]
+          }
+        ]
+      },
+      {
+        "name": "Working Knowledge",
+        "cards": [
+          { "title": "Mobile", "pills": ["React Native", "Swift", "Kotlin"] },
+          { "title": "Web3", "pills": ["Ethers.js", "Web3.js"] }
+        ]
+      },
+      {
+        "name": "Exploring & Play",
+        "cards": [
+          { "title": "Game / Creative", "pills": ["Unity", "Minecraft modding", "Three.js art"] }
+        ]
+      }
+    ]
+  }
+}
