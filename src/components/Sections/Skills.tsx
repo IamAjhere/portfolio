@@ -1,18 +1,13 @@
-import { useState } from 'react';
-import { ILeetSkills, IProfile, ISkill } from '../../Types/GitTypes';
+import { ILeetSkills, IProfile } from '../../Types/GitTypes';
+import LeetCodeStrip from '../Skills/LeetCodeStrip';
+import LegacySkills from '../Skills/LegacySkills';
+import SkillTier from '../Skills/SkillTier';
+import { TierEmphasis } from '../Skills/SkillCard';
 
-interface StaticSkillCategoryProps {
-  categoryTitle: string;
-  skills: string[];
-  isOpen: boolean;
-  handleToggleSkills: (categoryTitle: string) => void;
-}
+const EMPHASIS_BY_INDEX: TierEmphasis[] = ['expert', 'default', 'reduced', 'faint'];
 
-interface SkillCategoryProps {
-  categoryTitle: string;
-  skills: ISkill[] | null | undefined;
-  isOpen: boolean;
-  handleToggleSkills: (categoryTitle: string) => void;
+function emphasisForTier(index: number): TierEmphasis {
+  return EMPHASIS_BY_INDEX[Math.min(index, EMPHASIS_BY_INDEX.length - 1)];
 }
 
 interface SkillsProps {
@@ -20,164 +15,30 @@ interface SkillsProps {
   leetSkills: ILeetSkills | null;
 }
 
-function StaticSkillCategory({
-  categoryTitle,
-  skills,
-  isOpen,
-  handleToggleSkills,
-}: StaticSkillCategoryProps) {
-  return (
-    <div className='mt-4'>
-      <div
-        className='flex items-center text-sm font-medium mb-2 nav-link select-none'
-        onClick={() => handleToggleSkills(categoryTitle)}
-      >
-        <span
-          className={`transform inline-block mr-2 ${
-            isOpen ? 'rotate-90' : 'rotate-0'
-          } transition-all duration-200`}
-        >
-          ▶
-        </span>
-        <span>
-          {categoryTitle
-            .split('_')
-            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(' ')}
-        </span>
-      </div>
-      <div
-        className={`flex flex-wrap overflow-y-auto ${
-          isOpen ? 'max-h-40' : 'max-h-0'
-        }`}
-      >
-        {skills.map((skill) => (
-          <div
-            key={skill}
-            className='flex items-center text-xs my-2 mr-2 select-none'
-          >
-            <span className='inline-block'>
-              <span className='inline-flex items-center px-2 py-1 whitespace-nowrap leading-6 rounded-full text-white bg-black border custom-shadow-2px transition-all duration-200 '>
-                {skill}
-              </span>
-            </span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function SkillCategory({
-  categoryTitle,
-  skills,
-  isOpen,
-  handleToggleSkills,
-}: SkillCategoryProps) {
-  return (
-    <div className='mt-4'>
-      <div
-        className='flex items-center text-sm font-medium mb-2 nav-link select-none '
-        onClick={() => handleToggleSkills(categoryTitle)}
-      >
-        <span
-          className={`transform inline-block mr-2 ${
-            isOpen ? 'rotate-90' : 'rotate-0'
-          } transition-all duration-200`}
-        >
-          ▶
-        </span>
-        <span>{categoryTitle}</span>
-      </div>
-      <div
-        className={`flex flex-wrap overflow-y-auto ${
-          isOpen ? 'max-h-40' : 'max-h-0'
-        }`}
-      >
-        {skills?.map((skill) => (
-          <div
-            key={skill.tagName}
-            className='flex items-center text-xs my-2 mr-2 select-none'
-          >
-            <span className='inline-block'>
-              <span className='inline-flex items-center px-2 py-1 whitespace-nowrap leading-6 rounded-full text-white bg-black border custom-shadow-2px transition-all duration-200 '>
-                {skill.tagName}
-              </span>
-            </span>
-            <span className='text-xs text-gray-400 ml-2'>{`x${skill.problemsSolved}`}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 function Skills({ profile, leetSkills }: SkillsProps) {
-  const [openCategory, setOpenCategory] = useState('');
+  const tiers = profile?.portfolioData.skillDepth?.tiers;
 
-  const handleToggleSkills = (categoryTitle: string) => {
-    if (openCategory === categoryTitle) {
-      setOpenCategory('');
-    } else {
-      setOpenCategory(categoryTitle);
-    }
-  };
+  if (!tiers || tiers.length === 0) {
+    return <LegacySkills profile={profile} leetSkills={leetSkills} />;
+  }
 
   return (
     <div className='min-h-screen flex-grow sm:pt-10'>
       <div className='w-full h-full flex flex-col items-center justify-center p-4'>
-        <h1 className='text-4xl sm:mt-1 sm:text-6xl font-bold text-center text-white mb-4'>
+        <h1 className='text-4xl sm:mt-1 sm:text-6xl font-bold text-center text-white mb-8'>
           {'Skills'.split('').map((letter, index) => (
-            <span key={`hello-${index}`} className='letter-stroke'>
+            <span key={`skills-${index}`} className='letter-stroke'>
               {letter}
             </span>
           ))}
         </h1>
-        <div className='w-full h-full grid grid-cols-1 md:grid-cols-2 gap-10 mb-8'>
-          <div className='bg-black rounded-lg p-6 border border-white shadow-lg flex flex-col custom-shadow'>
-            <h2 className='text-2xl font-bold sm:mb-4 text-center  text-white '>
-              Leet Coding Skills
-            </h2>
-            <div className='sm:mt-8 w-full max-w-3xl mx-auto flex-grow  text-white'>
-              <SkillCategory
-                categoryTitle='Advanced'
-                skills={leetSkills?.advanced}
-                isOpen={openCategory === 'Advanced'}
-                handleToggleSkills={handleToggleSkills}
-              />
-              <SkillCategory
-                categoryTitle='Intermediate'
-                skills={leetSkills?.intermediate}
-                isOpen={openCategory === 'Intermediate'}
-                handleToggleSkills={handleToggleSkills}
-              />
-              <SkillCategory
-                categoryTitle='Fundamental'
-                skills={leetSkills?.fundamental}
-                isOpen={openCategory === 'Fundamental'}
-                handleToggleSkills={handleToggleSkills}
-              />
+        <div className='w-full max-w-4xl mb-8'>
+          {tiers.map((tier, index) => (
+            <div key={tier.name}>
+              <SkillTier tier={tier} emphasis={emphasisForTier(index)} />
+              {index === 0 && <LeetCodeStrip leetSkills={leetSkills} />}
             </div>
-          </div>
-          <div className='bg-black rounded-lg p-6 border border-white shadow-lg flex flex-col custom-shadow'>
-            <h2 className='text-2xl font-bold mb-4 text-center text-white'>
-              Overall Skills
-            </h2>
-            <div className='sm:mt-8 w-full max-w-3xl mx-auto flex-grow text-white'>
-              {profile &&
-                Object.entries(profile.portfolioData.skills).map(
-                  ([categoryTitle, skills]) => (
-                    <StaticSkillCategory
-                      key={categoryTitle}
-                      categoryTitle={categoryTitle}
-                      skills={skills}
-                      isOpen={openCategory === categoryTitle}
-                      handleToggleSkills={handleToggleSkills}
-                    />
-                  )
-                )}
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>
