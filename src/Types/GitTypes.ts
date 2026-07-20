@@ -34,6 +34,24 @@ export interface PortfolioData {
   skills: {
     [category: string]: string[];
   };
+  skillDepth?: ISkillDepth;
+}
+
+export interface ISkillCard {
+  title: string;
+  pills: string[];
+  subtitle?: string;
+  highlights?: string;
+  growing?: boolean;
+}
+
+export interface ISkillTier {
+  name: string;
+  cards: ISkillCard[];
+}
+
+export interface ISkillDepth {
+  tiers: ISkillTier[];
 }
 
 export interface ILeetSkills {
