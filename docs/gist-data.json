@@ -1,0 +1,174 @@
+{
+  "about": {
+    "job_title": "Senior Backend Engineer · Distributed Systems & Multi-Tenant SaaS",
+    "description": "Senior Software Engineer with 4+ years building and operating a multi-tenant HR SaaS platform of 20+ production microservices on AWS. I own backend domains end to end — schema, service, pipeline, production support — across payroll, billing and time-tracking, in Node.js and Python. Based in Sri Lanka (UTC+5:30), open to remote roles overlapping EU/UK/APAC hours."
+  },
+  "skills": {
+    "languages": [
+      "TypeScript",
+      "JavaScript",
+      "Python",
+      "Solidity"
+    ],
+    "backend": [
+      "Node.js",
+      "NestJS",
+      "Express.js",
+      "REST APIs",
+      "GraphQL / Apollo",
+      "Frappe / ERPNext",
+      "Microservices",
+      "Event-driven services"
+    ],
+    "database_storage": [
+      "MongoDB",
+      "MariaDB / MySQL",
+      "PostgreSQL / Prisma",
+      "Redis",
+      "Elasticsearch"
+    ],
+    "cloud_devops": [
+      "AWS (EKS, Lambda, EC2, S3)",
+      "Kubernetes",
+      "ArgoCD (GitOps)",
+      "Docker",
+      "Terraform",
+      "Serverless",
+      "CI/CD"
+    ],
+    "web_development": [
+      "React.js",
+      "Next.js",
+      "Tailwind CSS",
+      "Three.js",
+      "HTML",
+      "CSS",
+      "SASS"
+    ],
+    "integrations": [
+      "Stripe",
+      "Gmail API",
+      "Microsoft Graph",
+      "SendGrid",
+      "Google Places"
+    ],
+    "artificial_intelligence": [
+      "PyTorch",
+      "TensorFlow",
+      "Keras",
+      "Hugging Face"
+    ],
+    "blockchain_cryptocurrency": [
+      "Solidity",
+      "web3.js",
+      "ethers.js",
+      "Solana"
+    ],
+    "practices": [
+      "Code review",
+      "Mentoring",
+      "Multi-tenant design",
+      "OWASP",
+      "Agile / Scrum",
+      "SDLC"
+    ]
+  },
+  "skillDepth": {
+    "tiers": [
+      {
+        "name": "Expert",
+        "cards": [
+          {
+            "title": "Backend & Distributed Systems",
+            "subtitle": "20+ service multi-tenant platform · payroll, billing, time-tracking",
+            "pills": [
+              "Node.js",
+              "NestJS",
+              "TypeScript",
+              "Python",
+              "REST APIs",
+              "GraphQL / Apollo",
+              "MongoDB",
+              "MariaDB",
+              "Redis",
+              "Elasticsearch"
+            ],
+            "highlights": "20+ production microservices · payroll & billing pipelines · shared schema contracts · RBAC and inter-service auth"
+          }
+        ]
+      },
+      {
+        "name": "Advanced",
+        "cards": [
+          {
+            "title": "Cloud & Deployment",
+            "subtitle": "ship and run on Kubernetes",
+            "pills": [
+              "AWS",
+              "Kubernetes (EKS)",
+              "ArgoCD",
+              "Docker",
+              "CI/CD",
+              "Terraform"
+            ],
+            "highlights": "Services promoted through non-prod, QA, UAT and prod via GitOps"
+          },
+          {
+            "title": "Frontend",
+            "subtitle": "SPAs & SSR apps",
+            "pills": [
+              "React",
+              "Next.js",
+              "Tailwind",
+              "Three.js"
+            ]
+          },
+          {
+            "title": "AI / Agent Engineering",
+            "subtitle": "agentic tooling & workflows",
+            "growing": true,
+            "pills": [
+              "Claude Code",
+              "MCP servers",
+              "Agent workflows"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Working Knowledge",
+        "cards": [
+          {
+            "title": "Mobile",
+            "pills": [
+              "React Native",
+              "Swift",
+              "Kotlin"
+            ]
+          },
+          {
+            "title": "Web3",
+            "pills": [
+              "Ethers.js",
+              "Web3.js",
+              "Solidity"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Exploring & Play",
+        "cards": [
+          {
+            "title": "Game / Creative",
+            "pills": [
+              "Unity",
+              "Minecraft modding",
+              "Three.js art"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
