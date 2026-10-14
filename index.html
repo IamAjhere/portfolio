@@ -132,7 +132,51 @@
     </script>
   </head>
   <body>
-    <div id="root"></div>
+    <!-- Crawlable fallback. This is a client-rendered SPA, so AI crawlers
+         (GPTBot, ClaudeBot, PerplexityBot) and any non-JS fetch see an empty
+         page otherwise. React replaces #root on mount, so this content is only
+         ever visible to a client that does not run JavaScript. Keep it in sync
+         with public/llms.txt. -->
+    <div id="root">
+      <main>
+        <h1>Mohamed Ajmal — Senior Backend Engineer</h1>
+        <p>
+          Senior Software Engineer with 4+ years building and operating a
+          multi-tenant HR SaaS platform of 20+ production microservices on AWS.
+          I own backend domains end to end — schema, service, pipeline,
+          production support — across payroll, billing and time-tracking, in
+          Node.js and Python. Based in Sri Lanka (UTC+5:30), open to remote roles
+          overlapping EU, UK and APAC hours.
+        </p>
+        <p>
+          Contact: <a href="mailto:hello@iamajhere.com">hello@iamajhere.com</a>
+        </p>
+
+        <h2>Experience</h2>
+        <p>
+          Senior Software Engineer at Rooster HR, Singapore, since June 2025.
+          Previously Software Engineer (2024–2025) and Associate Software
+          Engineer (2023–2024) at the same company. Ships to production on
+          Kubernetes (EKS) via ArgoCD GitOps, runs backend code review, and
+          mentors junior engineers.
+        </p>
+
+        <h2>Technical focus</h2>
+        <p>
+          TypeScript, JavaScript, Python. Node.js, NestJS, Express.js, REST,
+          GraphQL, Frappe/ERPNext. MongoDB, MariaDB, PostgreSQL, Redis,
+          Elasticsearch. AWS (EKS, Lambda, EC2, S3), Kubernetes, ArgoCD, Docker,
+          Terraform. GitHub Actions, Bitbucket Pipelines, Jenkins.
+        </p>
+
+        <h2>Links</h2>
+        <ul>
+          <li><a href="https://github.com/IamAjhere">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/iamajhere">LinkedIn</a></li>
+          <li><a href="https://leetcode.com/iamajhere">LeetCode</a></li>
+        </ul>
+      </main>
+    </div>
     <form name="contact" data-netlify="true" hidden>
       <div>
         <input type="text" id="name" name="name" required />

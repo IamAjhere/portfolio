@@ -1,0 +1,47 @@
+# Mohamed Ajmal
+
+> Senior Backend Engineer specialising in distributed systems and multi-tenant SaaS.
+> 4+ years building and operating a 20+ service HR SaaS platform on AWS.
+> Based in Sri Lanka (UTC+5:30). Open to remote roles overlapping EU, UK and APAC
+> hours, and to relocation with visa sponsorship.
+
+Contact: hello@iamajhere.com
+Site: https://iamajhere.com
+GitHub: https://github.com/IamAjhere
+LinkedIn: https://www.linkedin.com/in/iamajhere
+
+## Current role
+
+Senior Software Engineer at Rooster HR (Singapore), since June 2025. Previously
+Software Engineer there (Feb 2024 - June 2025) and Associate Software Engineer
+(March 2023 - Feb 2024).
+
+Owns backend domains across a 20+ service platform — core, user, billing, payroll,
+time-tracking and analytics services — from schema design through production
+support. Drives architecture decisions for cross-service work including shared
+schema contracts and event-driven processing. Ships to production on Kubernetes
+(EKS) via ArgoCD GitOps. Runs backend code review and mentors junior engineers.
+
+## Technical focus
+
+- Languages: TypeScript, JavaScript, Python, Solidity
+- Backend: Node.js, NestJS, Express.js, REST, GraphQL, Frappe/ERPNext, event-driven services
+- Data: MongoDB, MariaDB, PostgreSQL, Redis, Elasticsearch
+- Cloud: AWS (EKS, Lambda, EC2, S3), Kubernetes, ArgoCD, Docker, Terraform
+- CI/CD: GitHub Actions, Bitbucket Pipelines, Jenkins
+
+## Selected work
+
+- Platform credits system, end to end — 25% increase in user engagement, 15% rise in in-app purchases
+- Python integrations on Frappe/ERPNext for finance workflows: tax invoice sequencing, VAT reconciliation, consignment settlement reporting
+- Cut Google Places API spend 40% via debouncing and a caching layer
+- Multi-provider email delivery across Gmail API, Microsoft Graph and SendGrid
+- Biometric capture service for employee attendance tracking
+- Task-Pro Infrastructure as Code — sole author of the Terraform stack: https://github.com/IamAjhere/Task-Pro-Terraform
+- Bullion price prediction — stacked LSTM over a MERN application: https://github.com/IamAjhere/bullion-price-prediction-system
+
+## Education
+
+- BEng Software Engineering, London Metropolitan University (2022-2023)
+- HND Computing, Pearson College London (2019-2021)
+- AWS Cloud Practitioner Essentials (2023), Harvard CS50x (2021)
