@@ -1,55 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Source for public/og-card.png. Render with:
      rsvg-convert -w 1200 -h 630 docs/og-card.svg -o public/og-card.png
-     Text is drawn as <text>, so the renderer needs Helvetica/Arial present. -->
+
+     Matches the site: black ground, white starfield, monospace type, and the
+     hard white offset shadow used by .custom-shadow / .letter-stroke in
+     src/index.css. The name repeats the .letter-stroke treatment — black fill,
+     white stroke, 3px white shadow drawn as an offset copy underneath.
+
+     Roboto Mono is the site font but is loaded from Google Fonts, not installed
+     locally, so the stack falls back to Menlo for rendering. Install Roboto Mono
+     and re-render if you want an exact match. -->
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0b1221"/>
-      <stop offset="55%" stop-color="#111c33"/>
-      <stop offset="100%" stop-color="#0a2a3d"/>
-    </linearGradient>
-    <linearGradient id="rule" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#36BDAE"/>
-      <stop offset="100%" stop-color="#36BDAE" stop-opacity="0"/>
-    </linearGradient>
-  </defs>
+  <rect width="1200" height="630" fill="#000000"/>
 
-  <rect width="1200" height="630" fill="url(#bg)"/>
-
-  <!-- faint grid, keeps the flat background from looking empty -->
-  <g stroke="#ffffff" stroke-opacity="0.04" stroke-width="1">
-    <path d="M0 110h1200M0 220h1200M0 330h1200M0 440h1200M0 550h1200"/>
-    <path d="M150 0v630M300 0v630M450 0v630M600 0v630M750 0v630M900 0v630M1050 0v630"/>
+  <!-- Starfield. Fixed positions, not random, so re-rendering is deterministic. -->
+  <g fill="#ffffff">
+    <circle cx="78"   cy="64"  r="1.6" opacity=".85"/>
+    <circle cx="196"  cy="128" r="1"   opacity=".45"/>
+    <circle cx="312"  cy="48"  r="1.3" opacity=".65"/>
+    <circle cx="430"  cy="96"  r="0.9" opacity=".35"/>
+    <circle cx="568"  cy="40"  r="1.7" opacity=".9"/>
+    <circle cx="676"  cy="112" r="1.1" opacity=".5"/>
+    <circle cx="792"  cy="56"  r="1.4" opacity=".7"/>
+    <circle cx="902"  cy="150" r="1"   opacity=".4"/>
+    <circle cx="1020" cy="72"  r="1.8" opacity=".95"/>
+    <circle cx="1136" cy="132" r="1.2" opacity=".55"/>
+    <circle cx="46"   cy="238" r="1.1" opacity=".5"/>
+    <circle cx="880"  cy="214" r="1.5" opacity=".75"/>
+    <circle cx="968"  cy="296" r="1"   opacity=".4"/>
+    <circle cx="1086" cy="246" r="1.6" opacity=".8"/>
+    <circle cx="1152" cy="350" r="1.1" opacity=".5"/>
+    <circle cx="820"  cy="372" r="1.3" opacity=".6"/>
+    <circle cx="1006" cy="430" r="1"   opacity=".38"/>
+    <circle cx="60"   cy="408" r="1.2" opacity=".55"/>
+    <circle cx="1120" cy="506" r="1.5" opacity=".72"/>
+    <circle cx="900"  cy="560" r="1"   opacity=".42"/>
+    <circle cx="1038" cy="596" r="1.3" opacity=".6"/>
+    <circle cx="150"  cy="588" r="1.1" opacity=".48"/>
+    <circle cx="268"  cy="534" r="0.9" opacity=".32"/>
+    <circle cx="700"  cy="604" r="1.4" opacity=".68"/>
+    <circle cx="492"  cy="572" r="1"   opacity=".4"/>
+    <circle cx="384"  cy="186" r="0.8" opacity=".3"/>
+    <circle cx="612"  cy="268" r="0.9" opacity=".34"/>
+    <circle cx="246"  cy="330" r="0.8" opacity=".28"/>
   </g>
 
-  <circle cx="1035" cy="150" r="190" fill="#36BDAE" fill-opacity="0.07"/>
+  <text x="88" y="136" font-family="Menlo,'Roboto Mono',monospace" font-size="23"
+        font-weight="700" fill="#ffffff" opacity="0.75" letter-spacing="5">IAMAJHERE.COM</text>
 
-  <text x="90" y="150" font-family="Helvetica,Arial,sans-serif" font-size="25"
-        font-weight="700" fill="#36BDAE" letter-spacing="4.5">IAMAJHERE.COM</text>
+  <!-- .letter-stroke: 3px white offset copy, then black fill with white stroke -->
+  <g font-family="Menlo,'Roboto Mono',monospace" font-size="74" font-weight="700">
+    <text x="91" y="261" fill="#ffffff">MOHAMED AJMAL</text>
+    <text x="88" y="258" fill="#000000" stroke="#ffffff" stroke-width="1.5">MOHAMED AJMAL</text>
+  </g>
 
-  <text x="90" y="268" font-family="Helvetica,Arial,sans-serif" font-size="82"
-        font-weight="700" fill="#ffffff" letter-spacing="-1">Mohamed Ajmal</text>
+  <text x="88" y="330" font-family="Menlo,'Roboto Mono',monospace" font-size="33"
+        fill="#ffffff">Senior Backend Engineer</text>
 
-  <text x="90" y="340" font-family="Helvetica,Arial,sans-serif" font-size="40"
-        font-weight="400" fill="#c6d4e8">Senior Backend Engineer</text>
+  <rect x="88" y="366" width="330" height="3" fill="#ffffff"/>
 
-  <rect x="90" y="382" width="420" height="4" fill="url(#rule)"/>
+  <text x="88" y="424" font-family="Menlo,'Roboto Mono',monospace" font-size="24"
+        fill="#ffffff" opacity="0.62">Distributed systems &#183; Multi-tenant SaaS</text>
 
-  <text x="90" y="452" font-family="Helvetica,Arial,sans-serif" font-size="27"
-        fill="#8fa3bf">Distributed systems &#183; Multi-tenant SaaS</text>
+  <!-- Boxes with the site's hard 4px white offset shadow (.custom-shadow) -->
+  <g font-family="Menlo,'Roboto Mono',monospace" font-size="21">
+    <rect x="92"  y="484" width="150" height="54" fill="#ffffff"/>
+    <rect x="88"  y="480" width="150" height="54" fill="#000000" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="163" y="514" fill="#ffffff" text-anchor="middle">Node.js</text>
 
-  <g font-family="Helvetica,Arial,sans-serif" font-size="23" font-weight="500">
-    <rect x="90"  y="498" width="132" height="52" rx="26" fill="#ffffff" fill-opacity="0.07"/>
-    <text x="156" y="531" fill="#dce6f5" text-anchor="middle">Node.js</text>
+    <rect x="266" y="484" width="140" height="54" fill="#ffffff"/>
+    <rect x="262" y="480" width="140" height="54" fill="#000000" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="332" y="514" fill="#ffffff" text-anchor="middle">Python</text>
 
-    <rect x="238" y="498" width="128" height="52" rx="26" fill="#ffffff" fill-opacity="0.07"/>
-    <text x="302" y="531" fill="#dce6f5" text-anchor="middle">Python</text>
+    <rect x="434" y="484" width="196" height="54" fill="#ffffff"/>
+    <rect x="430" y="480" width="196" height="54" fill="#000000" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="528" y="514" fill="#ffffff" text-anchor="middle">Kubernetes</text>
 
-    <rect x="382" y="498" width="172" height="52" rx="26" fill="#ffffff" fill-opacity="0.07"/>
-    <text x="468" y="531" fill="#dce6f5" text-anchor="middle">Kubernetes</text>
-
-    <rect x="570" y="498" width="112" height="52" rx="26" fill="#ffffff" fill-opacity="0.07"/>
-    <text x="626" y="531" fill="#dce6f5" text-anchor="middle">AWS</text>
+    <rect x="658" y="484" width="118" height="54" fill="#ffffff"/>
+    <rect x="654" y="480" width="118" height="54" fill="#000000" stroke="#ffffff" stroke-width="1.5"/>
+    <text x="713" y="514" fill="#ffffff" text-anchor="middle">AWS</text>
   </g>
 </svg>
