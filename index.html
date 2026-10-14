@@ -38,6 +38,13 @@
     <!-- Absolute URL required: scrapers do not resolve relative paths.
          Regenerate from docs/og-card.svg, see that file's header. -->
     <meta property="og:image" content="https://iamajhere.com/og-card.png" />
+    <!-- WhatsApp is stricter than other scrapers: it wants secure_url and an
+         explicit type, and skips the image when either is absent. -->
+    <meta
+      property="og:image:secure_url"
+      content="https://iamajhere.com/og-card.png"
+    />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta
