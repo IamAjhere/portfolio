@@ -3,6 +3,7 @@ import githubIcon from '../../assets/github icon.png';
 import linkedinIcon from '../../assets/linkedin-icon.png';
 import leetcodeIcon from '../../assets/leetcode-icon.png';
 import instagramIcon from '../../assets/instagram-icon.png';
+import messageIcon from '../../assets/message-icon.png';
 import Toast, { ToastProps } from '../Custom Toast/Toast';
 
 const EMAIL_PATTERN = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -41,11 +42,14 @@ interface SocialLinkProps {
 }
 
 function SocialLink({ href, icon, alt, text }: SocialLinkProps) {
+  // mailto: hands off to the mail client, so a new tab would leave a blank one behind
+  const isMailto = href.startsWith('mailto:');
+
   return (
   <a
     href={href}
-    target='_blank'
-    rel='noopener noreferrer'
+    target={isMailto ? undefined : '_blank'}
+    rel={isMailto ? undefined : 'noopener noreferrer'}
     className='flex items-center justify-center custom-shadow text-white bg-transparent border nav-link border-white rounded px-3 py-2 transition duration-500 ease-in-out transform hover:bg-white custom-shadow-black hover:text-black hover:no-invert'
   >
     <img
@@ -238,6 +242,12 @@ function Contact() {
               Connect with me
             </h2>
             <div className='mt-4 mb-2 flex flex-col space-y-3 '>
+              <SocialLink
+                href='mailto:hello@iamajhere.com'
+                icon={messageIcon}
+                alt='Email'
+                text='hello@iamajhere.com'
+              />
               <SocialLink
                 href='https://github.com/IamAjHere'
                 icon={githubIcon}
