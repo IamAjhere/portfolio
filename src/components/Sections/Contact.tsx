@@ -3,7 +3,7 @@ import githubIcon from '../../assets/github icon.png';
 import linkedinIcon from '../../assets/linkedin-icon.png';
 import leetcodeIcon from '../../assets/leetcode-icon.png';
 import instagramIcon from '../../assets/instagram-icon.png';
-import messageIcon from '../../assets/message-icon.png';
+import mailIcon from '../../assets/mail-icon.svg';
 import Toast, { ToastProps } from '../Custom Toast/Toast';
 
 const EMAIL_PATTERN = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -237,16 +237,16 @@ function Contact() {
               type={toast.type}
             />
           </div>
-          <div className='flex flex-col items-center mt-8 md:mt-0'>
+          <div className='flex flex-col items-center justify-center mt-8 md:mt-0 md:h-full'>
             <h2 className='text-2xl font-bold text-white mb-4'>
               Connect with me
             </h2>
             <div className='mt-4 mb-2 flex flex-col space-y-3 '>
               <SocialLink
                 href='mailto:hello@iamajhere.com'
-                icon={messageIcon}
+                icon={mailIcon}
                 alt='Email'
-                text='hello@iamajhere.com'
+                text='Email'
               />
               <SocialLink
                 href='https://github.com/IamAjHere'

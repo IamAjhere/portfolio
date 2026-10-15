@@ -132,12 +132,15 @@
     </script>
   </head>
   <body>
+    <div id="root"></div>
+
     <!-- Crawlable fallback. This is a client-rendered SPA, so AI crawlers
          (GPTBot, ClaudeBot, PerplexityBot) and any non-JS fetch see an empty
-         page otherwise. React replaces #root on mount, so this content is only
-         ever visible to a client that does not run JavaScript. Keep it in sync
-         with public/llms.txt. -->
-    <div id="root">
+         page otherwise. It sits in <noscript> rather than inside #root: the
+         markup is still present in the raw HTML these crawlers parse, but a
+         real browser never paints it, so there is no flash of unstyled content
+         while the bundle loads. Keep it in sync with public/llms.txt. -->
+    <noscript>
       <main>
         <h1>Mohamed Ajmal — Senior Backend Engineer</h1>
         <p>
@@ -176,7 +179,7 @@
           <li><a href="https://leetcode.com/iamajhere">LeetCode</a></li>
         </ul>
       </main>
-    </div>
+    </noscript>
     <form name="contact" data-netlify="true" hidden>
       <div>
         <input type="text" id="name" name="name" required />

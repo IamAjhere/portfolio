@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+     fill="none" stroke="#000000" stroke-width="2"
+     stroke-linecap="round" stroke-linejoin="round">
+  <!-- Black artwork so it matches the other icons, which the .invert class
+       flips to white on the dark background. -->
+  <rect x="2" y="4" width="20" height="16" rx="2"/>
+  <path d="m2 7 10 6 10-6"/>
+</svg>

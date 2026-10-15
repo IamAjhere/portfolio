@@ -1,23 +1,21 @@
 import { describe, it, expect } from 'vitest';
-import { createRoot } from 'react-dom/client';
-import { act } from 'react';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 
-// index.html keeps crawlable markup inside #root for AI crawlers. React must
-// replace it on mount, or real visitors would see it flash or stack up.
+// index.html keeps crawlable markup for AI crawlers that do not run JS. It has
+// to live in <noscript> and NOT inside #root: markup inside #root paints while
+// the bundle loads, which real visitors saw as a flash of unstyled content.
 describe('crawlable fallback', () => {
-  it('is replaced when React mounts', async () => {
-    const host = document.createElement('div');
-    host.id = 'root';
-    host.innerHTML = '<main><h1>FALLBACK</h1></main>';
-    document.body.appendChild(host);
+  const html = readFileSync(resolve(__dirname, '../../index.html'), 'utf8');
 
-    expect(host.textContent).toContain('FALLBACK');
+  it('leaves #root empty so nothing paints before React mounts', () => {
+    expect(html).toMatch(/<div id="root"><\/div>/);
+  });
 
-    await act(async () => {
-      createRoot(host).render(<div>APP</div>);
-    });
-
-    expect(host.textContent).not.toContain('FALLBACK');
-    expect(host.textContent).toBe('APP');
+  it('keeps the crawlable copy inside noscript', () => {
+    const noscript = html.match(/<noscript>([\s\S]*?)<\/noscript>/);
+    expect(noscript).not.toBeNull();
+    expect(noscript![1]).toContain('Senior Backend Engineer');
+    expect(noscript![1]).toContain('hello@iamajhere.com');
   });
 });
